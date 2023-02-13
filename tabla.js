@@ -16,7 +16,7 @@ function JatekterBetoltes()
 
     kartyaBox.innerHTML = "kartyaBox";
     pontokBox.innerHTML = "pontokBox";
-    tabla.innerHTML = "tabla";
+    //tabla.innerHTML = "tabla";
     korokBox.innerHTML = "korokBox";
 }
 function JatekterElrendezes()
@@ -29,6 +29,7 @@ function JatekterElrendezes()
 }
 function TablaGeneralas()
 {
+    var k = 1;
     for(var i = 0; i < 5; i++)
     {
         var sorDiv = document.createElement("div");
@@ -37,10 +38,53 @@ function TablaGeneralas()
         {
             var oszlopDiv = document.createElement("div");
             oszlopDiv.classList += " oszlopdiv";
-            oszlopDiv.innerHTML = "X";
             sorDiv.appendChild(oszlopDiv);
+            oszlopDiv.id = k++;
         }
         tabla.appendChild(sorDiv);
+    }
+}
+
+function TablaFeltoltes(db)
+{
+    var rlista = new Array();
+    var klista = new Array();
+    var i = 0;
+    while(i < db)
+    {
+        var random = Math.floor(Math.random()*30+1);
+        var random2 = Math.floor(Math.random()*23+1);
+        if(!rlista.includes(random) && !klista.includes(random2)){
+            rlista.push(random);
+            klista.push(random2);
+            var kep = document.createElement("img");
+            kep.src = "kartyak/"+random2+".png";
+            var cella = document.getElementById(random);
+            cella.appendChild(kep);
+            i++;
+        }
+    }
+    VarakFeltoltes(30-db,rlista);
+}
+function VarakFeltoltes(a, rlista)
+{
+    var vlista = new Array();
+    var varszin = ["kek", "piros", "sarga", "zold"];
+    var i = 0;
+    while(i < a)
+    {
+        var random = Math.floor(Math.random()*30+1);
+        var random2 = Math.floor(Math.random()*4+1);
+        var kr = Math.floor(Math.random()*4+1);
+        if(!rlista.includes(random) && !klista.includes(random2)){
+            rlista.push(random);
+            klista.push(random2);
+            var kep = document.createElement("img");
+            kep.src = "kartyak/"+random2+".png";
+            var cella = document.getElementById(random);
+            cella.appendChild(kep);
+            i++;
+        }
     }
 }
 function Main()
@@ -48,5 +92,6 @@ function Main()
     JatekterBetoltes();
     JatekterElrendezes();
     TablaGeneralas();
+    TablaFeltoltes(23);
 }
 Main();
