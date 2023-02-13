@@ -75,12 +75,11 @@ function VarakFeltoltes(a, rlista)
     {
         var random = Math.floor(Math.random()*30+1);
         var random2 = Math.floor(Math.random()*4+1);
-        var kr = Math.floor(Math.random()*4+1);
-        if(!rlista.includes(random) && !klista.includes(random2)){
-            rlista.push(random);
-            klista.push(random2);
+        var varak = Math.floor(Math.random()*3+1);
+        if(!rlista.includes(random) && !vlista.includes(random)){
+            vlista.push(random);
             var kep = document.createElement("img");
-            kep.src = "kartyak/"+random2+".png";
+            kep.src = "bastyak/"+varszin[varak]+"/"+random2+".png";
             var cella = document.getElementById(random);
             cella.appendChild(kep);
             i++;
