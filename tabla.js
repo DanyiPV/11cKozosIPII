@@ -93,49 +93,8 @@ function SorKiszamolas(klista){
     SorSzamolas.id = "SorSzamolas";
     document.body.appendChild(SorSzamolas);*/
     var ertekLista = [1,1,-1,2,-2,-2,2,3,3,-3,4,4,-4,5,5,-5,6,6,-6,0,0,0,0];
-    //Nem kell milliónyi if^^^^
     var db = 0;
     for(let i = 0; i < Object.keys(klista).length;i++){
-        /*
-        if(klista[i] < 20){
-            if(klista[i] == 2 || klista[i] == 1){
-                db++;
-            }
-            else if(klista[i] == 3){
-                db -=1;
-            }
-            else if(klista[i] == 4 || lista[i] == 7){
-                db += 2;
-            }   
-            else if(klista[i] == 5 || klista[i] == 6){
-                db -= 2;
-            }
-            else if(klista[i] == 8 || klista[i] == 9){
-                db += 3;
-            }  
-            else if(klista[i] == 10){
-                db -= 3;
-            }  
-            else if(klista[i] == 11 || klista[i] == 12){
-                db += 4;
-            }  
-            else if(klista[i] == 13){
-                db -= 4;
-            }  
-            else if(klista[i] == 14 || klista[i] == 15){
-                db += 5;
-            }  
-            else if(klista[i] == 16){
-                db -= 5;
-            }
-            else if(klista[i] == 17 || klista[i] == 17){
-                db += 6;
-            }  
-            else if(klista[i] == 18){
-                db -= 6;
-            }
-        }
-        */
         db += ertekLista[klista[i]-1];
         if(i % 5 == 0 || i == klista.lenght-1){
             console.log(db);
