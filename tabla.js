@@ -92,8 +92,11 @@ function SorKiszamolas(klista){
     /*var SorSzamolas = document.createElement("div");
     SorSzamolas.id = "SorSzamolas";
     document.body.appendChild(SorSzamolas);*/
+    var ertekLista = [1,1,-1,2,-2,-2,2,3,3,-3,4,4,-4,5,5,-5,6,6,-6,0,0,0,0];
+    //Nem kell milliónyi if^^^^
     var db = 0;
-    for(let i = 0; i < klista.lenght;i++){
+    for(let i = 0; i < Object.keys(klista).length;i++){
+        /*
         if(klista[i] < 20){
             if(klista[i] == 2 || klista[i] == 1){
                 db++;
@@ -132,6 +135,8 @@ function SorKiszamolas(klista){
                 db -= 6;
             }
         }
+        */
+        db += ertekLista[klista[i]-1];
         if(i % 5 == 0 || i == klista.lenght-1){
             console.log(db);
             db = 0;
