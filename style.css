@@ -13,19 +13,19 @@ body{
 #balpanel{
     width: 30%;
     /*border: 1px solid orange;*/
-    height: 40vw;
     background-color: rgb(153, 70, 1);
+    height: auto;
 }
 #kartyabox{
-    margin: 10px;
+    margin: 2%;
     /*border: 1px solid red;*/
-    height: 18vw;
+    height: 19vw;
     background-color: rgb(92, 43, 3);
 }
 #pontokbox{
-    margin: 10px;
+    margin: 2%;
     /*border: 1px solid blue;*/
-    height: 18vw;
+    height: 19vw;
     background-color: rgb(92, 43, 3);
 }
 #tabla{
