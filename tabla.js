@@ -89,9 +89,15 @@ function VarakFeltoltes(a, rlista,klista)
 }
 
 function SorKiszamolas(klista){
-    /*var SorSzamolas = document.createElement("div");
-    SorSzamolas.id = "SorSzamolas";
-    document.body.appendChild(SorSzamolas);*/
+    var Szamolas = document.createElement("div");
+    Szamolas.id = "Szamolas";
+    document.body.appendChild(Szamolas);
+    var SorSzam = document.createElement("div");
+    SorSzam.id = "SorSzam";
+    var OszlopSzam = document.createElement("div");
+    OszlopSzam.id = "OszlopSzam";
+    Szamolas.appendChild(SorSzam);
+    Szamolas.appendChild(OszlopSzam);
     var ertekLista = [1,1,-1,2,-2,-2,2,3,3,-3,4,4,-4,5,5,-5,6,6,-6,0,0,0,0];
     var db = 0;
     for(let i = 0; i < Object.keys(klista).length;i++){
