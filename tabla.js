@@ -5,6 +5,51 @@ var kartyaBox = document.createElement("div");
 var pontokBox = document.createElement("div");
 var tabla = document.createElement("div");
 var korokBox = document.createElement("div");
+//1,1,-1,2,-2,-2,2,3,3,-3,4,4,-4,5,5,-5,6,6,-6,0,0,0,0
+var KartyakTag = 
+[{id:1,value:1,sign:''},
+{id:2,value:1,sign:''},
+{id:3,value:-1,sign:''},
+{id:4,value:2,sign:''},
+{id:5,value:-2,sign:''},
+{id:6,value:-2,sign:''},
+{id:6,value:2,sign:''},
+{id:8,value:3,sign:''},
+{id:9,value:3,sign:''},
+{id:10,value:-3,sign:''},
+{id:11,value:4,sign:''},
+{id:12,value:4,sign:''},
+{id:13,value:-4,sign:''},
+{id:14,value:5,sign:''},
+{id:15,value:5,sign:''},
+{id:16,value:-5,sign:''},
+{id:17,value:6,sign:''},
+{id:18,value:6,sign:''},
+{id:19,value:-6,sign:''},
+{id:20,value:0,sign:'pap'},
+{id:21,value:0,sign:'hegy'},
+{id:22,value:0,sign:'taliga'},
+{id:23,value:0,sign:'sárkány'}
+];
+
+var VarTag = 
+[{id:1,value:1,sign:'kék'},
+{id:2,value:2,sign:'kék'},
+{id:3,value:3,sign:'kék'},
+{id:4,value:4,sign:'kék'},
+{id:5,value:1,sign:'piros'},
+{id:6,value:2,sign:'piros'},
+{id:6,value:3,sign:'piros'},
+{id:8,value:4,sign:'piros'},
+{id:9,value:1,sign:'sárga'},
+{id:10,value:2,sign:'sárga'},
+{id:11,value:3,sign:'sárga'},
+{id:12,value:4,sign:'sárga'},
+{id:13,value:1,sign:'zöld'},
+{id:14,value:2,sign:'zöld'},
+{id:15,value:3,sign:'zöld'},
+{id:16,value:4,sign:'zöld'}
+];
 
 function JatekterBetoltes()
 {
