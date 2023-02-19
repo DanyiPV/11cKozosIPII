@@ -47,48 +47,91 @@ function TablaGeneralas()
 
 function TablaFeltoltes(db)
 {
-    var rlista = new Array();
-    var klista = new Array();
-    var i = 0;
-    while(i < db)
+    var cellaLista = new Array(30);
+    //Átírtam for-ciklusba mert túl macera volt ott a while
+    for(let i =0;i<db;i++)
     {
-        var random = Math.floor(Math.random()*30+1);
-        var random2 = Math.floor(Math.random()*23+1);
-        if(!rlista.includes(random) && !klista.includes(random2)){
-            rlista.push(random);
-            klista.push(random2);
-            var kep = document.createElement("img");
-            kep.src = "kartyak/"+random2+".png";
-            var cella = document.getElementById(random);
-            cella.appendChild(kep);
-            i++;
+        //Kártya gen
+        var randomKep = Math.floor(Math.random()*23+1);
+        while(cellaLista.includes(randomKep))
+        {
+            randomKep = Math.floor(Math.random()*23+1);
         }
+        var kep = document.createElement("img");
+        kep.src = "kartyak/"+randomKep+".png";
+
+        //Cella gen
+        var randomCella = Math.floor(Math.random()*30+1);
+        while(cellaLista[randomCella-1]!=undefined)
+        {
+            randomCella = Math.floor(Math.random()*30+1);
+        }
+
+        var kivalaszottCella = document.getElementById(randomCella);
+        kivalaszottCella.appendChild(kep);
+
+        cellaLista.splice(randomCella-1,1,randomKep);
+        //console.log(cellaLista);
     }
-    VarakFeltoltes(30-db,rlista,klista);
+    //30-db lehet nem ideális, nem feltétlen kell minden üres helyet várral feltölteni
+    VarakFeltoltes(30-db,cellaLista);
+    SorKiszamolas(cellaLista);
 }
-function VarakFeltoltes(a, rlista,klista)
+function VarakFeltoltes(db, cellaLista)
 {
-    var vlista = new Array();
-    var varszin = ["kek", "piros", "sarga", "zold"];
-    var i = 0;
-    while(i < a)
+    var varLista = new Array(db);
+    var varSzinLista = ["k", "p", "s", "z"];
+    var varSzinSzamlalo = [0,0,0,0];
+    var varSzintLista = new Array(4);
+    //2D matrix gen
+    for(let i =0;i<4;i++)
     {
-        var random = Math.floor(Math.random()*30+1);
-        var random2 = Math.floor(Math.random()*4+1);
-        var varak = Math.floor(Math.random()*3+1);
-        if(!rlista.includes(random) && !vlista.includes(random)){
-            vlista.push(random);
-            var kep = document.createElement("img");
-            kep.src = "bastyak/"+varszin[varak]+"/"+random2+".png";
-            var cella = document.getElementById(random);
-            cella.appendChild(kep);
-            i++;
+        varSzintLista.splice(i,1,new Array(4));
+        for(let j =0;j<varSzintLista[i].length;j++)
+        {
+            varSzintLista[i][j] = false;
         }
     }
-    SorKiszamolas(klista);
+
+    for(let i =0;i<db;i++)
+    {
+        //Vár gen
+        var randomSzin = Math.floor(Math.random()*4);
+        while(varSzinSzamlalo[randomSzin]==4)
+        {
+            randomSzin = Math.floor(Math.random()*4);
+        }
+        varSzinSzamlalo[randomSzin]++;
+
+        var randomSzint = Math.floor(Math.random()*4+1);
+        //console.log(varSzintLista);
+        //console.log(randomSzin);
+        //console.log(randomSzint);
+        while(varSzintLista[randomSzin][randomSzint-1]==true)
+        {
+            randomSzint = Math.floor(Math.random()*4+1);
+        }
+        varSzintLista[randomSzin][randomSzint-1] = true;
+
+        var varKep = document.createElement("img");
+        varKep.src = "bastyak/"+varSzinLista[randomSzin]+"/"+randomSzint+".png";
+
+        //Cella gen
+        var randomCella = Math.floor(Math.random()*30+1);
+        while(cellaLista[randomCella-1]!=undefined)
+        {
+            randomCella = Math.floor(Math.random()*30+1);
+        }
+
+        var kivalaszottCella = document.getElementById(randomCella);
+        kivalaszottCella.appendChild(varKep);
+
+        cellaLista.splice(randomCella-1,1,varSzinLista[randomSzin]+randomSzint);
+        //console.log(cellaLista);
+    }
 }
 
-function SorKiszamolas(klista){
+function SorKiszamolas(cellaLista){
     var Szamolas = document.createElement("div");
     Szamolas.id = "Szamolas";
     document.body.appendChild(Szamolas);
@@ -99,13 +142,33 @@ function SorKiszamolas(klista){
     Szamolas.appendChild(SorSzam);
     Szamolas.appendChild(OszlopSzam);
     var ertekLista = [1,1,-1,2,-2,-2,2,3,3,-3,4,4,-4,5,5,-5,6,6,-6,0,0,0,0];
-    var db = 0;
-    for(let i = 0; i < Object.keys(klista).length;i++){
-        db += ertekLista[klista[i]-1];
-        if(i % 5 == 0 || i == klista.lenght-1){
-            console.log(db);
-            db = 0;
+    var db = "";
+    for(let i = 0; i < cellaLista.length;i+=6){
+        for(let j = i;j<i+6;j++)
+        {
+            if(typeof cellaLista[j] != "string"){
+                db += "+"+ertekLista[cellaLista[j]-1];
+                //console.log("j: "+j);
+                //console.log(cellaLista[i]-1);
+            }
         }
+        //console.log(db);
+        SorSzam.innerHTML+=db+";";
+        db = "";
+    }
+    for(let i = 0; i < 6;i++){
+        for(let j = i;j<cellaLista.length;j+=6)
+        {
+            console.log("j: "+j);
+            if(typeof cellaLista[j] != "string"){
+                db += "+"+ertekLista[cellaLista[j]-1];
+                //console.log("j: "+j);
+                //console.log(cellaLista[i]-1);
+            }
+        }
+        console.log(db);
+        OszlopSzam.innerHTML+=db+";";
+        db = "";
     }
 }
 
@@ -114,6 +177,6 @@ function Main()
     JatekterBetoltes();
     JatekterElrendezes();
     TablaGeneralas();
-    TablaFeltoltes(23);
+    TablaFeltoltes(23);//14 és 23 között lehet
 }
 Main();
