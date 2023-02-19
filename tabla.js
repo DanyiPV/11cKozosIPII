@@ -142,33 +142,33 @@ function SorKiszamolas(cellaLista){
     Szamolas.appendChild(SorSzam);
     Szamolas.appendChild(OszlopSzam);
     var ertekLista = [1,1,-1,2,-2,-2,2,3,3,-3,4,4,-4,5,5,-5,6,6,-6,0,0,0,0];
-    var db = "";
+    var db = 0;
     for(let i = 0; i < cellaLista.length;i+=6){
         for(let j = i;j<i+6;j++)
         {
             if(typeof cellaLista[j] != "string"){
-                db += "+"+ertekLista[cellaLista[j]-1];
+                db += ertekLista[cellaLista[j]-1];
                 //console.log("j: "+j);
                 //console.log(cellaLista[i]-1);
             }
         }
         //console.log(db);
         SorSzam.innerHTML+=db+";";
-        db = "";
+        db = 0;
     }
     for(let i = 0; i < 6;i++){
         for(let j = i;j<cellaLista.length;j+=6)
         {
             console.log("j: "+j);
             if(typeof cellaLista[j] != "string"){
-                db += "+"+ertekLista[cellaLista[j]-1];
+                db += ertekLista[cellaLista[j]-1];
                 //console.log("j: "+j);
                 //console.log(cellaLista[i]-1);
             }
         }
         console.log(db);
         OszlopSzam.innerHTML+=db+";";
-        db = "";
+        db = 0;
     }
 }
 
