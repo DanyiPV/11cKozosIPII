@@ -51,13 +51,7 @@ var VarTag =
 {id:16,value:4,color:4}
 ];
 
-var cellak = [
-    /*{
-        id: 1,
-        type: "",
-        {kártyatartalom}
-    }*/
-]
+var cellak = [];
 
 function JatekterBetoltes()
 {
@@ -228,15 +222,27 @@ function SorKiszamolas(cellaLista){
 }*/
 
 function cellakFeltoltese(){
+    var cellalist = new Array();
+    var random = Math.floor(Math.random()*23);
     for(let i = 0; i< 23;i++)
     {
+        while(cellalist.includes(random)) {
+            random = Math.floor(Math.random()*23);
+        }
         cellak[i].type = "kartya";
-        cellak[i].kartya = KartyakTag[i];
+        cellak[i].kartya = KartyakTag[random];
+        cellalist.push(random);
     }
+    var cellalist1 = new Array();
+    random = Math.floor(Math.random()*16);
     for(let i = 23; i< 30;i++)
     {
+        while(cellalist1.includes(random)) {
+            random = Math.floor(Math.random()*16);
+        }
         cellak[i].type = "vár";
-        cellak[i].kartya = VarTag[i-23];
+        cellak[i].kartya = VarTag[random];
+        cellalist1.push(random);
     }
 }
 
@@ -249,9 +255,9 @@ function Main()
     //TablaFeltoltes(23);//14 és 23 között lehet
 }
 
-var objektum = {id: 1, nev: "Béla", szev: 1467};
+/*var objektum = {id: 1, nev: "Béla", szev: 1467};
 console.log(objektum.id + " "+ objektum.nev);
 objektum.nev = "Karcso";
-console.log(objektum.nev);
+console.log(objektum.nev);*/
 
 Main();
