@@ -33,22 +33,22 @@ var KartyakTag =
 ];
 
 var VarTag = 
-[{id:1,value:1,sign:'kék'},
-{id:2,value:2,sign:'kék'},
-{id:3,value:3,sign:'kék'},
-{id:4,value:4,sign:'kék'},
-{id:5,value:1,sign:'piros'},
-{id:6,value:2,sign:'piros'},
-{id:6,value:3,sign:'piros'},
-{id:8,value:4,sign:'piros'},
-{id:9,value:1,sign:'sárga'},
-{id:10,value:2,sign:'sárga'},
-{id:11,value:3,sign:'sárga'},
-{id:12,value:4,sign:'sárga'},
-{id:13,value:1,sign:'zöld'},
-{id:14,value:2,sign:'zöld'},
-{id:15,value:3,sign:'zöld'},
-{id:16,value:4,sign:'zöld'}
+[{id:1,value:1,color:1},
+{id:2,value:2,color:2},
+{id:3,value:3,color:3},
+{id:4,value:4,color:4},
+{id:5,value:1,color:1},
+{id:6,value:2,color:2},
+{id:6,value:3,color:3},
+{id:8,value:4,color:4},
+{id:9,value:1,color:1},
+{id:10,value:2,color:2},
+{id:11,value:3,color:3},
+{id:12,value:4,color:4},
+{id:13,value:1,color:1},
+{id:14,value:2,color:2},
+{id:15,value:3,color:3},
+{id:16,value:4,color:4}
 ];
 
 function JatekterBetoltes()
@@ -197,7 +197,7 @@ function SorKiszamolas(cellaLista){
                 //console.log(cellaLista[i]-1);
             }
         }
-        //console.log(db);
+        //console.log(db)
         SorSzam.innerHTML+=db+";";
         db = 0;
     }
@@ -224,4 +224,10 @@ function Main()
     TablaGeneralas();
     TablaFeltoltes(23);//14 és 23 között lehet
 }
+
+var objektum = {id: 1, nev: "Béla", szev: 1467};
+console.log(objektum.id + " "+ objektum.nev);
+objektum.nev = "Karcso";
+console.log(objektum.nev);
+
 Main();
