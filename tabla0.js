@@ -92,13 +92,15 @@ function TablaGeneralas()
             var oszlopDiv = document.createElement("div");
             oszlopDiv.classList += " oszlopdiv";
             sorDiv.appendChild(oszlopDiv);
+            cellak.push({id: k});
             oszlopDiv.id = k++;
         }
         tabla.appendChild(sorDiv);
     }
+    console.log(cellak);
 }
 
-function TablaFeltoltes(db)
+/*function TablaFeltoltes(db)
 {
     var cellaLista = new Array(30);
     //Átírtam for-ciklusba mert túl macera volt ott a while
@@ -223,6 +225,19 @@ function SorKiszamolas(cellaLista){
         OszlopSzam.innerHTML+=db+";";
         db = 0;
     }
+}*/
+
+function cellakFeltoltese(){
+    for(let i = 0; i< 23;i++)
+    {
+        cellak[i].type = "kartya";
+        cellak[i].kartya = KartyakTag[i];
+    }
+    for(let i = 23; i< 30;i++)
+    {
+        cellak[i].type = "vár";
+        cellak[i].kartya = VarTag[i-23];
+    }
 }
 
 function Main()
@@ -230,7 +245,8 @@ function Main()
     JatekterBetoltes();
     JatekterElrendezes();
     TablaGeneralas();
-    TablaFeltoltes(23);//14 és 23 között lehet
+    cellakFeltoltese();
+    //TablaFeltoltes(23);//14 és 23 között lehet
 }
 
 var objektum = {id: 1, nev: "Béla", szev: 1467};
