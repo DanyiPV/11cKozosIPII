@@ -51,14 +51,6 @@ var VarTag =
 {id:16,value:4,color:4}
 ];
 
-var cellak = [
-    /*{
-        id: 1,
-        type: "",
-        {kártyatartalom}
-    }*/
-]
-
 function JatekterBetoltes()
 {
     balPanel.appendChild(kartyaBox);
