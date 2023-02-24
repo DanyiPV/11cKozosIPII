@@ -51,7 +51,9 @@ var VarTag =
 {id:16,value:4,color:4}
 ];
 
-var cellak = [];
+var cellak = new Array(30);
+
+var kijeloltElem;
 
 function JatekterBetoltes()
 {
@@ -197,7 +199,7 @@ function cellakFeltoltese(){
         var cella = {id: random+1};
         cella.type = "kártya";
         cella.kartya = KartyakTag[i];
-        cellak.push(cella);
+        cellak.splice(i,1,cella);
     }
     var erreKellEgykulonListaMertMarMashogyNemTudtamMegoldani = [];
     for(let i = 0; i< 7;i++)
@@ -214,7 +216,7 @@ function cellakFeltoltese(){
         var cella = {id: random+1};
         cella.type = "vár";
         cella.kartya = VarTag[randomKepMertKiegek];
-        cellak.push(cella);
+        cellak.splice(23+i,1,cella);
     }
     //console.log(cellak);
 }
@@ -228,6 +230,7 @@ function cellakKirajzolasa(){
         if(cellak[i].type=="kártya")
         {
             kep.src = "kartyak/"+cellak[i].kartya.id+".png";
+            kep.title = cellak[i].id;
         }
         else
         {
@@ -240,6 +243,45 @@ function cellakKirajzolasa(){
         //console.log(hely);
     }
 }
+function pontozas()
+{
+    for(var i = 0; i<30;i+=6)
+    {
+        var sorOsszeg = 0;
+        for(var j = i; j<i+6;j++)
+        {
+            if(cellak[j].type == "kártya")
+            {
+                console.log(cellak[j]);
+                sorOsszeg+=cellak[j].kartya.value;
+            }
+        }
+        console.log(sorOsszeg+" a sor összeg a "+((i+6)/6));
+    }
+    for(var i = 0; i<6;i++)
+    {
+        var oszlopOsszeg = 0;
+        for(var j = i; j<30;j+=6)
+        {
+            if(cellak[j].type == "kártya")
+            {
+                oszlopOsszeg+=cellak[j].kartya.value;
+            }
+        }
+        console.log(oszlopOsszeg+" az oszlop összeg a "+i);
+    }
+}
+function kijeloles(elem)
+{
+    kijeloltElem = elem;
+}
+function lerakas(div)
+{
+    if(kijeloles != undefined)
+    {
+        div.appendChild();
+    }
+}
 
 function Main()
 {
@@ -248,6 +290,7 @@ function Main()
     TablaGeneralas();
     cellakFeltoltese();
     cellakKirajzolasa();
+    pontozas();
     //TablaFeltoltes(23);//14 és 23 között lehet
 }
 
