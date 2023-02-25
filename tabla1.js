@@ -191,7 +191,7 @@ function KepAttevo(div){
             KartyaIndex = cellak[i].id;
             div.setAttribute("onclick","");
             RanyomE = true;
-            RanyomE2 = false;   
+            RanyomE2 = false;
         }
     }
 }
@@ -224,7 +224,7 @@ function KepAtteves(div){
         RanyomE2 = true;
     }
     if(ValuesArray.length == 30){
-        Kiszamolas()
+        Kiszamolas();
     }
 }
 
