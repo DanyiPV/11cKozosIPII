@@ -153,7 +153,7 @@ function CellakRandomizalasa(){
             kep.src = "bastyak/"+cellak[i].kartya.id+".png";
             //kep.title = cellak[i].id;
         }
-        kep.setAttribute("onclick","KepAttevo(this)");
+        //kep.setAttribute("onclick","KepAttevo(this)");
         hely2.appendChild(kep);
     }
 }
@@ -196,14 +196,28 @@ function KepKivalaszto(){
         {
             var oszlopDiv = document.createElement("div");
             oszlopDiv.classList += "MOszlopdiv";
+            oszlopDiv.setAttribute("onclick","KepAttevo(this)");
             sorDiv.appendChild(oszlopDiv);
             oszlopDiv.id = k++;
         }
         Kivalaszto.appendChild(sorDiv);
     }
 }
-function KepAttevo(img){
-    
+function KepAttevo(div){
+    var index = div.id;
+    var kep = document.createElement("img");
+    if(cellak[index-1].type == "kártya")
+    {
+        kep.src = "kartyak/"+cellak[index-1].kartya.id+".png";
+        
+    }
+    else
+    {
+        kep.src = "bastyak/"+cellak[index-1].kartya.id+".png";
+        
+    }
+    var hely = document.getElementById(index-30);
+    hely.appendChild(kep);
 }
 
 function Main()
