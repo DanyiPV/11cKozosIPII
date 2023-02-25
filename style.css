@@ -77,3 +77,24 @@ body{
 #kijelolve{
     border: 2px solid rgb(251, 255, 0);
 }
+#Kivalaszto{
+    /*border: 1px solid white;*/
+    margin-top: 5px;
+    height: 23vw;
+    width: 30%;
+    background-color: rgb(119, 50, 3);
+}
+.MSordiv{
+    display: flex;
+    flex-direction: row;
+    height: 4.5vw;
+}
+.MOszlopdiv{
+    background-color: green;
+    /*border: 1px solid red;*/
+    width: 100%;
+    margin: 5px;
+}
+#Kivalaszto img{
+    width: 100%;
+}
