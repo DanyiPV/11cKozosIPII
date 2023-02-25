@@ -206,25 +206,19 @@ function KepKivalaszto(){
 function KepAttevo(div){
     var index = div.id;
     var kep = document.createElement("img");
-    if(cellak[index-31].type == "kártya")
+    let i = 0;
+    while(cellak[i].id != index-30){
+        i++
+    }
+    if(cellak[i].type == "kártya")
     {
-        let i = 0;
-        while(cellak[i].id != index-30){
-            i++
-            console.log(i);
-        }
-        console.log(cellak[i].kartya.id);
         kep.src = "kartyak/"+cellak[i].kartya.id+".png";
     }
     else
     {
-        let i = 0;
-        while(cellak[i].id != index-30){
-            i++
-        }
-        console.log(cellak[i].kartya.id);
         kep.src = "bastyak/"+cellak[i].kartya.id+".png";
     }
+    div.setAttribute("onclick","");
     var hely = document.getElementById(index-30);
     hely.appendChild(kep);
 }
