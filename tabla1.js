@@ -85,6 +85,7 @@ function TablaGeneralas()
         {
             var oszlopDiv = document.createElement("div");
             oszlopDiv.classList += " oszlopdiv";
+            oszlopDiv.setAttribute("onclick","KepAtteves(this)");
             sorDiv.appendChild(oszlopDiv);
             oszlopDiv.id = k++;
         }
@@ -156,6 +157,7 @@ function CellakRandomizalasa(){
         //kep.setAttribute("onclick","KepAttevo(this)");
         hely2.appendChild(kep);
     }
+    Kiszamolas();
 }
 function Kiszamolas(){
     for(var i = 1; i < 31;i+=6){
@@ -203,24 +205,48 @@ function KepKivalaszto(){
         Kivalaszto.appendChild(sorDiv);
     }
 }
+var indexlista = new Array();
+var RanyomE = false;
+var KartyaIndex = 0;
+var RanyomE2 = false;
 function KepAttevo(div){
-    var index = div.id;
-    var kep = document.createElement("img");
-    let i = 0;
-    while(cellak[i].id != index-30){
-        i++
+    if(RanyomE == false){
+        var HelyIndex = div.id;
+        let i = 0;
+        while(cellak[i].id != HelyIndex-30){
+            i++
+        }
+        if(!indexlista.includes(cellak[i].id)){
+            indexlista.push(cellak[i].id);
+            KartyaIndex = cellak[i].id;
+            div.setAttribute("onclick","");
+            RanyomE = true;
+            RanyomE2 = false;   
+        }
     }
-    if(cellak[i].type == "kártya")
-    {
-        kep.src = "kartyak/"+cellak[i].kartya.id+".png";
+}
+function KepAtteves(div){
+    if(RanyomE2 == false){
+        var index = div.id;
+        var kep = document.createElement("img");
+        let i = 0;
+        while(cellak[i].id != KartyaIndex){
+            i++
+        }
+        if(cellak[i].type == "kártya")
+        {
+            kep.src = "kartyak/"+cellak[i].kartya.id+".png";
+        }
+        else
+        {
+            kep.src = "bastyak/"+cellak[i].kartya.id+".png";
+        }
+        div.setAttribute("onclick","");
+        var hely = document.getElementById(index);
+        hely.appendChild(kep);
+        RanyomE = false;
+        RanyomE2 = true;
     }
-    else
-    {
-        kep.src = "bastyak/"+cellak[i].kartya.id+".png";
-    }
-    div.setAttribute("onclick","");
-    var hely = document.getElementById(index-30);
-    hely.appendChild(kep);
 }
 
 function Main()
