@@ -147,42 +147,12 @@ function CellakRandomizalasa(){
         if(cellak[i].type=="kártya")
         {
             kep.src = "kartyak/"+cellak[i].kartya.id+".png";
-            //kep.title = cellak[i].id;
         }
         else
         {
             kep.src = "bastyak/"+cellak[i].kartya.id+".png";
-            //kep.title = cellak[i].id;
         }
-        //kep.setAttribute("onclick","KepAttevo(this)");
         hely2.appendChild(kep);
-    }
-    Kiszamolas();
-}
-function Kiszamolas(){
-    for(var i = 1; i < 31;i+=6){
-        var db = 0;
-        for(var j = 0; j < 6;j++){
-            for(var k = 0; k < 30;k++){
-                if(cellak[k].id == (i+j) && cellak[k].type == "kártya"){
-                    db += cellak[k].kartya.value;
-                    break;
-                }
-            }
-        }
-        console.log((Math.floor((i/6))+1)+". sor: "+db);
-    }
-    for(var i = 0; i < 6;i++){
-        var db = 0;
-        for(var j = 1; j < 31;j+=6){
-            for(var k = 0; k < 30;k++){
-                if(cellak[k].id == (i+j) && cellak[k].type == "kártya"){
-                    db += cellak[k].kartya.value;
-                    break;
-                }
-            }
-        }
-        console.log((i+1)+". oszlop: "+db); 
     }
 }
 function KepKivalaszto(){
@@ -225,6 +195,7 @@ function KepAttevo(div){
         }
     }
 }
+var ValuesArray = new Array();
 function KepAtteves(div){
     if(RanyomE2 == false){
         var index = div.id;
@@ -242,10 +213,45 @@ function KepAtteves(div){
             kep.src = "bastyak/"+cellak[i].kartya.id+".png";
         }
         div.setAttribute("onclick","");
+        var ValueCella = {};
+        ValueCella.id = index;
+        ValueCella.type = cellak[i].type;
+        ValueCella.value = cellak[i].kartya.value;
+        ValuesArray.push(ValueCella);
         var hely = document.getElementById(index);
         hely.appendChild(kep);
         RanyomE = false;
         RanyomE2 = true;
+    }
+    if(ValuesArray.length == 30){
+        Kiszamolas()
+    }
+}
+
+function Kiszamolas(){
+    for(var i = 1; i < 31;i+=6){
+        var db = 0;
+        for(var j = 0; j < 6;j++){
+            for(var k = 0; k < 30;k++){
+                if(ValuesArray[k].id == (i+j) && ValuesArray[k].type == "kártya"){
+                    db += ValuesArray[k].value;
+                    break;
+                }
+            }
+        }
+        console.log((Math.floor((i/6))+1)+". sor: "+db);
+    }
+    for(var i = 0; i < 6;i++){
+        var db = 0;
+        for(var j = 1; j < 31;j+=6){
+            for(var k = 0; k < 30;k++){
+                if(ValuesArray[k].id == (i+j) && ValuesArray[k].type == "kártya"){
+                    db += ValuesArray[k].value;
+                    break;
+                }
+            }
+        }
+        console.log((i+1)+". oszlop: "+db); 
     }
 }
 
