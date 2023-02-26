@@ -160,11 +160,11 @@ function KepKivalaszto(){
     Kivalaszto.id = "Kivalaszto";
     document.body.appendChild(Kivalaszto);
     var k = 31;
-    for(var i = 0; i < 5; i++)
+    for(var i = 0; i < 2; i++)
     {
         var sorDiv = document.createElement("div");
         sorDiv.classList += "MSordiv";
-        for(var j = 0; j<6;j++)
+        for(var j = 0; j<15;j++)
         {
             var oszlopDiv = document.createElement("div");
             oszlopDiv.classList += "MOszlopdiv";
@@ -175,10 +175,13 @@ function KepKivalaszto(){
         Kivalaszto.appendChild(sorDiv);
     }
 }
+//Globál változók
 var indexlista = new Array();
 var RanyomE = false;
 var KartyaIndex = 0;
 var RanyomE2 = false;
+var KivalasztoDB = 0;
+//Alsó táblából való kép kiválasztás
 function KepAttevo(div){
     if(RanyomE == false){
         var HelyIndex = div.id;
@@ -192,9 +195,16 @@ function KepAttevo(div){
             div.setAttribute("onclick","");
             RanyomE = true;
             RanyomE2 = false;
+            div.classList += " Eltuntet";
+            KivalasztoDB++;
+            if(KivalasztoDB == 30){
+                var KivalasztoTer = document.getElementById("Kivalaszto");
+                KivalasztoTer.classList = "Eltuntet";
+            }
         }
     }
 }
+//Alap táblába való kép behelyezés
 var ValuesArray = new Array();
 function KepAtteves(div){
     if(RanyomE2 == false){
@@ -227,11 +237,12 @@ function KepAtteves(div){
         Kiszamolas();
     }
 }
-
+//Sor Oszlop kiszámoló
 function Kiszamolas(){
+    console.log("---------Sor összegek---------");
     for(var i = 1; i < 31;i+=6){
         var db = 0;
-        for(var j = 0; j < 6;j++){
+        for(var j = 0; j < 5;j++){
             for(var k = 0; k < 30;k++){
                 if(ValuesArray[k].id == (i+j) && ValuesArray[k].type == "kártya"){
                     db += ValuesArray[k].value;
@@ -241,6 +252,7 @@ function Kiszamolas(){
         }
         console.log((Math.floor((i/6))+1)+". sor: "+db);
     }
+    console.log("---------Oszlop összegek---------");
     for(var i = 0; i < 6;i++){
         var db = 0;
         for(var j = 1; j < 31;j+=6){
