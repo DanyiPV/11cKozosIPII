@@ -29,8 +29,7 @@ var KartyakTag =
 {id:20,value:0,sign:'pap'},
 {id:21,value:0,sign:'hegy'},
 {id:22,value:0,sign:'taliga'},
-{id:23,value:0,sign:'sárkány'}
-];
+{id:23,value:0,sign:'sárkány'}];
 
 var VarTag = 
 [{id:1,value:1,color:1},
@@ -48,8 +47,7 @@ var VarTag =
 {id:13,value:1,color:1},
 {id:14,value:2,color:2},
 {id:15,value:3,color:3},
-{id:16,value:4,color:4}
-];
+{id:16,value:4,color:4}];
 
 var cellak = new Array(30);
 
@@ -231,6 +229,7 @@ function cellakKirajzolasa(){
         {
             kep.src = "kartyak/"+cellak[i].kartya.id+".png";
             kep.title = cellak[i].id;
+            
         }
         else
         {
