@@ -57,9 +57,11 @@ body{
 }
 .oszlopdiv{
     border: 1px solid white;
-    width: 16.6%;
+    width: 12.6%;
     margin: 5px;
     border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .oszlopdiv img{
     width: 100%;
