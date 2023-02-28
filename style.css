@@ -82,6 +82,7 @@ body{
 #KivalasztoDiv img{
     height: 12vw;
     width: 100%;
+    border-radius: 8px;
 }
 #kartyabox img{
     height: 14vw;
