@@ -93,39 +93,18 @@ function TablaGeneralas()
     }
     var KartyaBox = document.getElementById("kartyabox");
     var Kep = document.createElement("img");
-    Kep.src = "lekartya1.png";
+    Kep.src = "lekartya.png";
     Kep.setAttribute("onclick","RandomKivalaszt()");
     KartyaBox.appendChild(Kep);
     var KivalasztoDiv = document.createElement("div");
     KivalasztoDiv.id = "KivalasztoDiv";
     document.body.appendChild(KivalasztoDiv);
 }
-/*
-function benneVanE(elem, lista){
-    for(let i = 0;i<lista.length;i++)
-    {
-        if(lista[i] != undefined){
-            if(lista[i].id == elem)
-            {
-                return true;
-            }
-        }
-    }
-    return false;
-}*/
 
 function CellakRandomizalasa(){
     //Kártya tagek randomizálása
     for(let i = 0; i< 23;i++)
     {
-        /*var random = Math.floor(Math.random()*30);
-        while(benneVanE(random+1,cellak)) {
-            random = Math.floor(Math.random()*30);
-        }
-        var cella = {id: random+1};
-        cella.type = "kártya";
-        cella.kartya = KartyakTag[i];
-        cellak.splice(i,1,cella);*/
         var cella = {id: i+1};
         cella.type = "kártya";
         cella.kartya = KartyakTag[i];
@@ -135,19 +114,6 @@ function CellakRandomizalasa(){
     //Vár tagek randomizálása
     for(let i = 0; i< 16;i++)
     {
-        /*random = Math.floor(Math.random()*30);
-        var rKep = Math.floor(Math.random()*16);
-        while(benneVanE(random+1,cellak)) {
-            random = Math.floor(Math.random()*30);
-        }
-        while(rklista .includes(rKep)) {
-            rKep = Math.floor(Math.random()*16);
-        }
-        rklista .push(rKep);
-        var cella = {id: random+1};
-        cella.type = "vár";
-        cella.kartya = VarTag[rKep];
-        cellak.splice(23+i,1,cella);*/
         var cella = {id: i+24};
         cella.type = "vár";
         cella.kartya = VarTag[i];

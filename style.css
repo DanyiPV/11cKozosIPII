@@ -1,6 +1,7 @@
 body{
     background-color: rgb(32, 32, 32);
     color: white;
+    transition: .8;
 }
 
 #jatekter{
@@ -11,8 +12,6 @@ body{
 }
 #balpanel{
     width: 30%;
-    /*border: 1px solid orange;
-    background-color: rgb(153, 70, 1);*/
     background-image: url("balpanel_hatter.jpg");
     background-repeat: no-repeat;
     background-position: center;
@@ -22,15 +21,11 @@ body{
 }
 #kartyabox{
     margin: 2%;
-    /*border: 1px solid red;*/
     height: 14vw;
-    /*background-color: rgb(92, 43, 3);*/
 }
 #pontokbox{
     margin: 2%;
-    /*border: 1px solid blue;*/
     height: 14.7vw;
-    /*background-color: rgb(92, 43, 3);*/
     border: 1px solid white;
     border-radius: 8px;
 }
@@ -42,6 +37,7 @@ body{
     height: auto;
     display: flex;
     flex-direction: column;
+    margin: 0 5px 0 5px;
 }
 #korokbox{
     width: 20%;
@@ -57,6 +53,7 @@ body{
 }
 .oszlopdiv{
     border: 1px solid white;
+    opacity: 1;
     width: 12.6%;
     margin: 5px;
     border-radius: 10px;
@@ -91,4 +88,8 @@ body{
     display: block;
     margin-left: auto;
     margin-right: auto;
+    transition: .8s;
+}
+#kartyabox img:hover{
+    height: 16vw;
 }
