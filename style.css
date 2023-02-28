@@ -5,78 +5,87 @@ body{
 
 #jatekter{
     width: 100%;
-    border: 1px solid black;
     display: flex;
     flex-direction: row;
-    height: 40vw;
+    height: 30%;
 }
 #balpanel{
     width: 30%;
-    /*border: 1px solid orange;*/
-    background-color: rgb(153, 70, 1);
+    /*border: 1px solid orange;
+    background-color: rgb(153, 70, 1);*/
+    background-image: url("balpanel_hatter.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     height: auto;
+    border: 1px solid black;
 }
 #kartyabox{
     margin: 2%;
     /*border: 1px solid red;*/
-    height: 19vw;
-    background-color: rgb(92, 43, 3);
+    height: 14vw;
+    /*background-color: rgb(92, 43, 3);*/
 }
 #pontokbox{
     margin: 2%;
     /*border: 1px solid blue;*/
-    height: 19.3vw;
-    background-color: rgb(92, 43, 3);
+    height: 14.7vw;
+    /*background-color: rgb(92, 43, 3);*/
+    border: 1px solid white;
+    border-radius: 8px;
 }
 #tabla{
     width: 50%;
-    background-color: darkgreen;
-    /*border: 1px solid green;*/
-    height: 40vw;
+    background-image: url("tabla_hatter.jpg");
+    background-size: cover;
+    border: 1px solid black;
+    height: auto;
     display: flex;
     flex-direction: column;
 }
 #korokbox{
     width: 20%;
-    background-color: darkcyan;
-    /*border: 1px solid yellow;*/
-    height: 40vw;
+    height: auto;
+    background-image: url("korok_box.jpg");
+    background-size: cover;
+    border: 1px solid black;
 }
 .sordiv{
     display: flex;
     flex-direction: row;
-    height: 8vw;
+    height: 6.09vw;
 }
 .oszlopdiv{
-    background-color: green;
-    /*border: 1px solid red;*/
+    border: 1px solid white;
     width: 16.6%;
     margin: 5px;
+    border-radius: 10px;
 }
-#jatekter img{
+.oszlopdiv img{
     width: 100%;
+    height: 100%;
+    border-radius: 10px;
 }
 #kijelolve{
     border: 2px solid rgb(251, 255, 0);
 }
 #KivalasztoDiv{
-    /*border: 1px solid white;*/
-    margin-top: 5px;
+    margin-top: 15px;
     height: 12vw;
-    background-color: rgb(119, 50, 3);
+    background-color: rgb(61, 61, 61);
     width: 12%;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    border: 2px solid white;
+    border: 1.5px solid white;
+    border-radius: 8px;
 }
 #KivalasztoDiv img{
     height: 12vw;
     width: 100%;
 }
 #kartyabox img{
-    height: 19vw;
-    margin-top: 10px;
+    height: 14vw;
     display: block;
     margin-left: auto;
     margin-right: auto;

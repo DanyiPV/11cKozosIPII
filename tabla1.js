@@ -93,7 +93,7 @@ function TablaGeneralas()
     }
     var KartyaBox = document.getElementById("kartyabox");
     var Kep = document.createElement("img");
-    Kep.src = "lekartya.jpg";
+    Kep.src = "lekartya1.png";
     Kep.setAttribute("onclick","RandomKivalaszt()");
     KartyaBox.appendChild(Kep);
     var KivalasztoDiv = document.createElement("div");
