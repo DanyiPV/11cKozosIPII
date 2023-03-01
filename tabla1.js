@@ -99,48 +99,45 @@ function TablaGeneralas()
     var KivalasztoDiv = document.createElement("div");
     KivalasztoDiv.id = "KivalasztoDiv";
     document.body.appendChild(KivalasztoDiv);
+    CellakRandomizalasa();
 }
 
 function CellakRandomizalasa(){
     //Kártya tagek randomizálása
+    var rlista = new Array();
     for(let i = 0; i< 23;i++)
     {
-        var cella = {id: i+1};
+        var random = Math.floor(Math.random()*23);
+        while(rlista.includes(random)){
+            random = Math.floor(Math.random()*23);
+        }
+        rlista.push(random);
+        var cella = {id: random+1};
         cella.type = "kártya";
-        cella.kartya = KartyakTag[i];
+        cella.kartya = KartyakTag[random];
         cellak.push(cella);
     }
-    //var rklista = [];
     //Vár tagek randomizálása
-    for(let i = 0; i< 16;i++)
+    /*for(let i = 0; i< 16;i++)
     {
         var cella = {id: i+24};
         cella.type = "vár";
         cella.kartya = VarTag[i];
         cellak.push(cella);
-    }
+    }*/
     console.log(cellak);
 }
 
 var RanyomE = false;
-var RandomLista = new Array();
-var KepIndex = 0;
+var CellaIndex = 0;
 var RanyomE2 = true;
 function RandomKivalaszt(){
-    if(RanyomE == false && RandomLista.length != 23){
+    if(RanyomE == false){   
         RanyomE = true;
-        var random = Math.floor(Math.random()*23);
-        while(RandomLista.includes(random)){
-            random = Math.floor(Math.random()*23);
-        }
-        RandomLista.push(random);
-        KepIndex = random;
-        var KivalasztoDiv = document.getElementById("KivalasztoDiv");
         var Kep = document.createElement("img");
-        Kep.setAttribute("onclick","KepAttevo()");
         Kep.id = -1;
-        Kep.src = "kartyak/"+cellak[random].kartya.id+".png";
-        KivalasztoDiv.appendChild(Kep);
+        Kep.src = "kartyak/"+cellak[CellaIndex].kartya.id+".png";
+        var KivalasztoDiv = document.getElementById("KivalasztoDiv").appendChild(Kep);
         RanyomE2 = false;
     }
 }
@@ -151,29 +148,26 @@ function KepAtteves(div){
     if(RanyomE2 == false){
         var index = div.id;
         var kep = document.createElement("img");
-        kep.src = "kartyak/"+cellak[KepIndex].kartya.id+".png";
-        var AmiKellDiv = document.getElementById(index);
-        AmiKellDiv.removeAttribute("onclick");
+        kep.src = "kartyak/"+cellak[CellaIndex].kartya.id+".png";
+        var AmiKellDiv = document.getElementById(index).removeAttribute("onclick");
         var ValueCella = {};
         ValueCella.id = index;
-        ValueCella.type = cellak[KepIndex].type;
-        ValueCella.value = cellak[KepIndex].kartya.value;
+        ValueCella.type = cellak[CellaIndex].type;
+        ValueCella.value = cellak[CellaIndex].kartya.value;
         ValuesArray.push(ValueCella);
-        var hely = document.getElementById(index);
-        hely.appendChild(kep);
-        var KivalasztoDiv = document.getElementById("KivalasztoDiv");
-        var Kep2 = document.getElementById(-1);
-        KivalasztoDiv.removeChild(Kep2);
+        var hely = document.getElementById(index).appendChild(kep);
+        var KivalasztoDiv = document.getElementById("KivalasztoDiv").removeChild(document.getElementById(-1));
         RanyomE2 = true;
         RanyomE = false;
         if(ValuesArray.length == 23){
             //console.log(ValuesArray);
             Kiszamolas();
         }
+        CellaIndex++;
     }
 }
 //Sor Oszlop kiszámoló
-function Kiszamolas(){
+/*function Kiszamolas(){
     console.log("---------Sor összegek---------");
     for(var i = 1; i < 24;i+=6){
         var db = 0;
@@ -200,13 +194,13 @@ function Kiszamolas(){
         }
         console.log((i+1)+". oszlop: "+db); 
     }
-}
+}*/
+
 function Main()
 {
     JatekterBetoltes();
     JatekterElrendezes();
     TablaGeneralas();
-    CellakRandomizalasa();
     //eddig jó
 }
 Main();
