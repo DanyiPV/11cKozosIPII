@@ -28,6 +28,7 @@ body{
     height: 14.7vw;
     border: 1px solid white;
     border-radius: 8px;
+    border-style: dotted;
 }
 #tabla{
     width: 50%;
@@ -76,8 +77,9 @@ body{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    border: 1.5px solid white;
+    border: 2px solid white;
     border-radius: 8px;
+    border-style: ridge;
 }
 #KivalasztoDiv img{
     height: 12vw;
