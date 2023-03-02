@@ -95,6 +95,7 @@ function TablaGeneralas()
     var Kep = document.createElement("img");
     Kep.src = "lekartya.png";
     Kep.setAttribute("onclick","RandomKivalaszt()");
+    Kep.id = "KartyabBoxKepHover";
     KartyaBox.appendChild(Kep);
     var KivalasztoDiv = document.createElement("div");
     KivalasztoDiv.id = "KivalasztoDiv";
@@ -132,7 +133,7 @@ var RanyomE = false;
 var CellaIndex = 0;
 var RanyomE2 = true;
 function RandomKivalaszt(){
-    if(RanyomE == false){   
+    if(RanyomE == false && CellaIndex != 23){   
         RanyomE = true;
         var Kep = document.createElement("img");
         Kep.id = -1;
@@ -145,7 +146,7 @@ function RandomKivalaszt(){
 //Alsó táblába való kép behelyezés
 var ValuesArray = new Array();
 function KepAtteves(div){
-    if(RanyomE2 == false){
+    if(RanyomE2 == false && CellaIndex != 23){
         var index = div.id;
         var kep = document.createElement("img");
         kep.src = "kartyak/"+cellak[CellaIndex].kartya.id+".png";
@@ -159,11 +160,10 @@ function KepAtteves(div){
         var KivalasztoDiv = document.getElementById("KivalasztoDiv").removeChild(document.getElementById(-1));
         RanyomE2 = true;
         RanyomE = false;
-        if(ValuesArray.length == 23){
-            //console.log(ValuesArray);
-            Kiszamolas();
-        }
         CellaIndex++;
+        if(CellaIndex == 23){
+            document.getElementById("KartyabBoxKepHover").id = "";
+        }
     }
 }
 //Sor Oszlop kiszámoló

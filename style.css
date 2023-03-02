@@ -93,6 +93,6 @@ body{
     margin-right: auto;
     transition: .8s;
 }
-#kartyabox img:hover{
+#KartyabBoxKepHover:hover{
     height: 16vw;
 }
