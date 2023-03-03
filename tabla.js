@@ -242,6 +242,15 @@ function KepAtteves(div){
         RanyomE = false;
         VarIndex = 0;
     }
+    if(document.getElementById(-1) != undefined){
+        RanyomE = true;
+    }
+    else{
+        RanyomE = false;
+        if(CellaIndex > 4){
+            CellaIndex++;
+        }
+    }
 }
 
 
