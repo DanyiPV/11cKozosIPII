@@ -61,7 +61,6 @@ function JatekterBetoltes()
     jatekTer.appendChild(tabla);
     jatekTer.appendChild(korokBox);
 
-    korokBox.innerHTML = "korokBox";
 }
 function JatekterElrendezes()
 {
@@ -117,11 +116,27 @@ function KozosDivek(){
 function OtosKepKiGen(){
     var OtosLapok= document.getElementById("OtosLapok");
     for(let i = 0; i < 5; i++){
+        var LapDivek = document.createElement("div");
+        LapDivek.className = "LapDivek";
+        LapDivek.id = -i-10;
         var Lapok = document.createElement("img");
-        Lapok.src = "kartyak/"+cellak[CellaIndex++].kartya.id+".png";
-        Lapok.id = "Lapok";
-        OtosLapok.appendChild(Lapok);
+        Lapok.src = "kartyak/"+cellak[i].kartya.id+".png";
+        Lapok.id = -i-2;
+        Lapok.setAttribute("onclick","OtoskepAttevo(this)");
+        LapDivek.appendChild(Lapok);
+        OtosLapok.appendChild(LapDivek);
     }
+}
+
+var RanyomE = false;
+var CellaIndex = 5;
+var CellaIndex2 = 0;
+function OtoskepAttevo(img){
+    if(CellaIndex > 4){
+        CellaIndex2 = CellaIndex;
+    }
+    CellaIndex = Math.abs(img.id)-2;
+    RanyomE = true;
 }
 
 function CellakRandomizalasa(){
@@ -139,75 +154,57 @@ function CellakRandomizalasa(){
         cella.kartya = KartyakTag[random];
         cellak.push(cella);
     }
-    //Vár tagek randomizálása
-    /*for(let i = 0; i< 16;i++)
-    {
-        var cella = {id: i+24};
-        cella.type = "vár";
-        cella.kartya = VarTag[i];
-        cellak.push(cella);
-    }*/
     console.log(cellak);
 }
 
-var RanyomE = false;
-var CellaIndex = 0;
 function RandomKivalaszt(){
-    if(RanyomE == false && CellaIndex != 23){   
+    if(RanyomE == false && CellaIndex != 23){
         RanyomE = true;
         var Kep = document.createElement("img");
         Kep.id = -1;
         Kep.src = "kartyak/"+cellak[CellaIndex].kartya.id+".png";
-        var KivalasztoDiv = document.getElementById("KivalasztoDiv").appendChild(Kep);
+        document.getElementById("KivalasztoDiv").appendChild(Kep);
     }
 }
-//Globál változók
-//Alsó táblába való kép behelyezés
-//var ValuesArray = new Array();
+
+var LapDivIndex = -10;
+var LapIndex = -2;
 function KepAtteves(div){
     if(RanyomE == true && CellaIndex != 23){
         var index = div.id;
         var kep = document.createElement("img");
         kep.src = "kartyak/"+cellak[CellaIndex].kartya.id+".png";
-        var AmiKellDiv = document.getElementById(index).removeAttribute("onclick");
-        var hely = document.getElementById(index).appendChild(kep);
-        var KivalasztoDiv = document.getElementById("KivalasztoDiv").removeChild(document.getElementById(-1));
-        RanyomE = false;
-        CellaIndex++;
+        document.getElementById(index).removeAttribute("onclick");
+        document.getElementById(index).appendChild(kep);
+        if(CellaIndex > 4){
+            document.getElementById("KivalasztoDiv").removeChild(document.getElementById(-1));
+        }
+        else{
+            document.getElementById(LapDivIndex-CellaIndex).removeChild(document.getElementById(LapIndex-CellaIndex));
+            if(CellaIndex2 > 4){
+                CellaIndex = CellaIndex2;
+                CellaIndex2 = 0;
+            }
+            else{
+                CellaIndex = 5;
+            }
+            RanyomE = true;
+        }
+        if(document.getElementById(-1) != undefined){
+            RanyomE = true;
+        }
+        else{
+            RanyomE = false;
+            if(CellaIndex > 4){
+                CellaIndex++;
+            }
+        }
         if(CellaIndex == 23){
             document.getElementById("KartyabBoxKepHover").id = "";
         }
     }
 }
-//Sor Oszlop kiszámoló
-/*function Kiszamolas(){
-    console.log("---------Sor összegek---------");
-    for(var i = 1; i < 24;i+=6){
-        var db = 0;
-        for(var j = 0; j < 6;j++){
-            for(var k = 0; k < 23;k++){
-                if(ValuesArray[k].id == (i+j) && ValuesArray[k].type == "kártya"){
-                    db += ValuesArray[k].value;
-                    break;
-                }
-            }
-        }
-        console.log((Math.floor((i/6))+1)+". sor: "+db);
-    }
-    console.log("---------Oszlop összegek---------");
-    for(var i = 0; i < 6;i++){
-        var db = 0;
-        for(var j = 1; j < 24;j+=6){
-            for(var k = 0; k < 23;k++){
-                if(ValuesArray[k].id == (i+j) && ValuesArray[k].type == "kártya"){
-                    db += ValuesArray[k].value;
-                    break;
-                }
-            }
-        }
-        console.log((i+1)+". oszlop: "+db); 
-    }
-}*/
+
 
 function Main()
 {

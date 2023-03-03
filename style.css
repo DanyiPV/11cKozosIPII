@@ -105,15 +105,22 @@ body{
 }
 #OtosLapok{
     height: auto;
-    width: 35%;
+    width: 40%;
     border: 2px solid white;
     background-color: rgb(61, 61, 61);
     border-radius: 5px;
     display: flex;
 
 }
-#Lapok{
-    height: auto;
-    width: 15%;
-    
+.LapDivek{
+    height: 7vw;
+    width: 17%;
+    margin: auto;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+.LapDivek img{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
 }
