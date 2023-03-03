@@ -111,6 +111,35 @@ function KozosDivek(){
     OtosLapok.id = "OtosLapok";
     KozosDiv.appendChild(OtosLapok);
     OtosKepKiGen();
+    VarakGen();
+}
+
+var VarLista = [1,1,1,1,2,2,2,3,3,4];
+function VarakGen(){
+    var Indexe = 0;
+    var VarDiv = document.getElementById("VarDiv");
+    for(var i = 1; i < 3;i++){
+        var VarakKiGensor = document.createElement("div");
+        VarakKiGensor.className = "VarakKiGensor";
+        for(var j = 0; j < 5;j++){
+            var KiGenVarDivek = document.createElement("div");
+            KiGenVarDivek.className= "KiGenVarDivek";
+            KiGenVarDivek.id = (Indexe+1)+200;
+            var Kep = document.createElement("img");
+            Kep.id = (Indexe+1)+100;
+            Kep.src = "bastyak/"+VarLista[Indexe++]+".png";
+            Kep.setAttribute("onclick","KiGenVarAttesz(this)");
+            KiGenVarDivek.appendChild(Kep);
+            VarakKiGensor.appendChild(KiGenVarDivek);
+        }
+        VarDiv.appendChild(VarakKiGensor);
+    }
+}
+
+var VarIndex = 0;
+function KiGenVarAttesz(img){
+    VarIndex = img.id-100;
+    RanyomE = true;
 }
 
 function OtosKepKiGen(){
@@ -158,7 +187,7 @@ function CellakRandomizalasa(){
 }
 
 function RandomKivalaszt(){
-    if(RanyomE == false && CellaIndex != 23){
+    if(RanyomE == false && CellaIndex != 23 && VarIndex == 0){
         RanyomE = true;
         var Kep = document.createElement("img");
         Kep.id = -1;
@@ -170,7 +199,7 @@ function RandomKivalaszt(){
 var LapDivIndex = -10;
 var LapIndex = -2;
 function KepAtteves(div){
-    if(RanyomE == true && CellaIndex != 23){
+    if(RanyomE == true && CellaIndex != 23 && VarIndex == 0){
         var index = div.id;
         var kep = document.createElement("img");
         kep.src = "kartyak/"+cellak[CellaIndex].kartya.id+".png";
@@ -202,6 +231,16 @@ function KepAtteves(div){
         if(CellaIndex == 23){
             document.getElementById("KartyabBoxKepHover").id = "";
         }
+    }
+    else if(RanyomE == true && CellaIndex != 23 && VarIndex != 0){
+        var index = div.id;
+        var kep = document.createElement("img");
+        kep.src = "bastyak/"+VarLista[VarIndex-1]+".png";
+        document.getElementById(index).removeAttribute("onclick");
+        document.getElementById(index).appendChild(kep);
+        document.getElementById(VarIndex+200).removeChild(document.getElementById(VarIndex+100));
+        RanyomE = false;
+        VarIndex = 0;
     }
 }
 

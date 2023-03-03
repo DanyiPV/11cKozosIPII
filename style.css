@@ -56,11 +56,10 @@ body{
 .sordiv{
     display: flex;
     flex-direction: row;
-    height: 6.09vw;
+    height: 6vw;
 }
 .oszlopdiv{
     border: 1px solid white;
-    opacity: 1;
     width: 11.5%;
     margin: 5px;
     border-radius: 10px;
@@ -96,18 +95,11 @@ body{
 #KartyabBoxKepHover:hover{
     height: 15vw;
 }
-#VarDiv{
-    height: 12vw;
-    width: 35%;
-    border: 2px solid white;
-    background-color: rgb(61, 61, 61);
-    border-radius: 5px;
-}
 #OtosLapok{
-    height: auto;
+    height: 8.5vw;
     width: 40%;
     border: 2px solid white;
-    background-color: rgb(61, 61, 61);
+    background-color: rgb(12, 12, 12);
     border-radius: 5px;
     display: flex;
 
@@ -117,9 +109,32 @@ body{
     width: 17%;
     margin: auto;
     border: 1px solid white;
+    background-color: rgb(61, 61, 61);
     border-radius: 5px;
 }
 .LapDivek img{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+#VarDiv{
+    width: 35%;
+    border: 2px solid white;
+    background-color: rgb(12, 12, 12);
+    border-radius: 5px;
+}
+.VarakKiGensor{
+    display: flex;
+}
+.KiGenVarDivek{
+    height: 5vw;
+    width: 15%;
+    margin: 10px auto;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: rgb(61, 61, 61);
+}
+.KiGenVarDivek img{
     width: 100%;
     height: 100%;
     border-radius: 5px;
