@@ -13,7 +13,7 @@ var KartyakTag =
 {id:4,value:2,sign:''},
 {id:5,value:-2,sign:''},
 {id:6,value:-2,sign:''},
-{id:6,value:2,sign:''},
+{id:7,value:2,sign:''},
 {id:8,value:3,sign:''},
 {id:9,value:3,sign:''},
 {id:10,value:-3,sign:''},
@@ -39,7 +39,7 @@ var VarTag =
 {id:4,value:4,color:4},
 {id:5,value:1,color:1},
 {id:6,value:2,color:2},
-{id:6,value:3,color:3},
+{id:7,value:3,color:3},
 {id:8,value:4,color:4},
 {id:9,value:1,color:1},
 {id:10,value:2,color:2},
@@ -51,13 +51,7 @@ var VarTag =
 {id:16,value:4,color:4}
 ];
 
-var cellak = [
-    /*{
-        id: 1,
-        type: "",
-        {kártyatartalom}
-    }*/
-]
+var cellak = [];
 
 function JatekterBetoltes()
 {
@@ -67,7 +61,7 @@ function JatekterBetoltes()
     jatekTer.appendChild(tabla);
     jatekTer.appendChild(korokBox);
 
-    kartyaBox.innerHTML = "kartyaBox";
+    //kartyaBox.innerHTML = "kartyaBox";
     pontokBox.innerHTML = "pontokBox";
     //tabla.innerHTML = "tabla";
     korokBox.innerHTML = "korokBox";
@@ -91,151 +85,122 @@ function TablaGeneralas()
         {
             var oszlopDiv = document.createElement("div");
             oszlopDiv.classList += " oszlopdiv";
+            oszlopDiv.setAttribute("onclick","KepAtteves(this)");
             sorDiv.appendChild(oszlopDiv);
             oszlopDiv.id = k++;
         }
         tabla.appendChild(sorDiv);
     }
+    var KartyaBox = document.getElementById("kartyabox");
+    var Kep = document.createElement("img");
+    Kep.src = "lekartya.png";
+    Kep.setAttribute("onclick","RandomKivalaszt()");
+    Kep.id = "KartyabBoxKepHover";
+    KartyaBox.appendChild(Kep);
+    var KivalasztoDiv = document.createElement("div");
+    KivalasztoDiv.id = "KivalasztoDiv";
+    document.body.appendChild(KivalasztoDiv);
+    CellakRandomizalasa();
 }
 
-function TablaFeltoltes(db)
-{
-    var cellaLista = new Array(30);
-    //Átírtam for-ciklusba mert túl macera volt ott a while
-    for(let i =0;i<db;i++)
+function CellakRandomizalasa(){
+    //Kártya tagek randomizálása
+    var rlista = new Array();
+    for(let i = 0; i< 23;i++)
     {
-        //Kártya gen
-        var randomKep = Math.floor(Math.random()*23+1);
-        while(cellaLista.includes(randomKep))
-        {
-            randomKep = Math.floor(Math.random()*23+1);
+        var random = Math.floor(Math.random()*23);
+        while(rlista.includes(random)){
+            random = Math.floor(Math.random()*23);
         }
+        rlista.push(random);
+        var cella = {id: random+1};
+        cella.type = "kártya";
+        cella.kartya = KartyakTag[random];
+        cellak.push(cella);
+    }
+    //Vár tagek randomizálása
+    /*for(let i = 0; i< 16;i++)
+    {
+        var cella = {id: i+24};
+        cella.type = "vár";
+        cella.kartya = VarTag[i];
+        cellak.push(cella);
+    }*/
+    console.log(cellak);
+}
+
+var RanyomE = false;
+var CellaIndex = 0;
+var RanyomE2 = true;
+function RandomKivalaszt(){
+    if(RanyomE == false && CellaIndex != 23){   
+        RanyomE = true;
+        var Kep = document.createElement("img");
+        Kep.id = -1;
+        Kep.src = "kartyak/"+cellak[CellaIndex].kartya.id+".png";
+        var KivalasztoDiv = document.getElementById("KivalasztoDiv").appendChild(Kep);
+        RanyomE2 = false;
+    }
+}
+//Globál változók
+//Alsó táblába való kép behelyezés
+var ValuesArray = new Array();
+function KepAtteves(div){
+    if(RanyomE2 == false && CellaIndex != 23){
+        var index = div.id;
         var kep = document.createElement("img");
-        kep.src = "kartyak/"+randomKep+".png";
-
-        //Cella gen
-        var randomCella = Math.floor(Math.random()*30+1);
-        while(cellaLista[randomCella-1]!=undefined)
-        {
-            randomCella = Math.floor(Math.random()*30+1);
+        kep.src = "kartyak/"+cellak[CellaIndex].kartya.id+".png";
+        var AmiKellDiv = document.getElementById(index).removeAttribute("onclick");
+        var ValueCella = {};
+        ValueCella.id = index;
+        ValueCella.type = cellak[CellaIndex].type;
+        ValueCella.value = cellak[CellaIndex].kartya.value;
+        ValuesArray.push(ValueCella);
+        var hely = document.getElementById(index).appendChild(kep);
+        var KivalasztoDiv = document.getElementById("KivalasztoDiv").removeChild(document.getElementById(-1));
+        RanyomE2 = true;
+        RanyomE = false;
+        CellaIndex++;
+        if(CellaIndex == 23){
+            document.getElementById("KartyabBoxKepHover").id = "";
         }
-
-        var kivalaszottCella = document.getElementById(randomCella);
-        kivalaszottCella.appendChild(kep);
-
-        cellaLista.splice(randomCella-1,1,randomKep);
-        //console.log(cellaLista);
-    }
-    //30-db lehet nem ideális, nem feltétlen kell minden üres helyet várral feltölteni
-    VarakFeltoltes(30-db,cellaLista);
-    SorKiszamolas(cellaLista);
-}
-function VarakFeltoltes(db, cellaLista)
-{
-    var varLista = new Array(db);
-    var varSzinLista = ["k", "p", "s", "z"];
-    var varSzinSzamlalo = [0,0,0,0];
-    var varSzintLista = new Array(4);
-    //2D matrix gen
-    for(let i =0;i<4;i++)
-    {
-        varSzintLista.splice(i,1,new Array(4));
-        for(let j =0;j<varSzintLista[i].length;j++)
-        {
-            varSzintLista[i][j] = false;
-        }
-    }
-
-    for(let i =0;i<db;i++)
-    {
-        //Vár gen
-        var randomSzin = Math.floor(Math.random()*4);
-        while(varSzinSzamlalo[randomSzin]==4)
-        {
-            randomSzin = Math.floor(Math.random()*4);
-        }
-        varSzinSzamlalo[randomSzin]++;
-
-        var randomSzint = Math.floor(Math.random()*4+1);
-        //console.log(varSzintLista);
-        //console.log(randomSzin);
-        //console.log(randomSzint);
-        while(varSzintLista[randomSzin][randomSzint-1]==true)
-        {
-            randomSzint = Math.floor(Math.random()*4+1);
-        }
-        varSzintLista[randomSzin][randomSzint-1] = true;
-
-        var varKep = document.createElement("img");
-        varKep.src = "bastyak/"+varSzinLista[randomSzin]+"/"+randomSzint+".png";
-
-        //Cella gen
-        var randomCella = Math.floor(Math.random()*30+1);
-        while(cellaLista[randomCella-1]!=undefined)
-        {
-            randomCella = Math.floor(Math.random()*30+1);
-        }
-
-        var kivalaszottCella = document.getElementById(randomCella);
-        kivalaszottCella.appendChild(varKep);
-
-        cellaLista.splice(randomCella-1,1,varSzinLista[randomSzin]+randomSzint);
-        //console.log(cellaLista);
     }
 }
-
-function SorKiszamolas(cellaLista){
-    var Szamolas = document.createElement("div");
-    Szamolas.id = "Szamolas";
-    document.body.appendChild(Szamolas);
-    var SorSzam = document.createElement("div");
-    SorSzam.id = "SorSzam";
-    var OszlopSzam = document.createElement("div");
-    OszlopSzam.id = "OszlopSzam";
-    Szamolas.appendChild(SorSzam);
-    Szamolas.appendChild(OszlopSzam);
-    var ertekLista = [1,1,-1,2,-2,-2,2,3,3,-3,4,4,-4,5,5,-5,6,6,-6,0,0,0,0];
-    var db = 0;
-    for(let i = 0; i < cellaLista.length;i+=6){
-        for(let j = i;j<i+6;j++)
-        {
-            if(typeof cellaLista[j] != "string"){
-                db += ertekLista[cellaLista[j]-1];
-                //console.log("j: "+j);
-                //console.log(cellaLista[i]-1);
+//Sor Oszlop kiszámoló
+/*function Kiszamolas(){
+    console.log("---------Sor összegek---------");
+    for(var i = 1; i < 24;i+=6){
+        var db = 0;
+        for(var j = 0; j < 6;j++){
+            for(var k = 0; k < 23;k++){
+                if(ValuesArray[k].id == (i+j) && ValuesArray[k].type == "kártya"){
+                    db += ValuesArray[k].value;
+                    break;
+                }
             }
         }
-        //console.log(db)
-        SorSzam.innerHTML+=db+";";
-        db = 0;
+        console.log((Math.floor((i/6))+1)+". sor: "+db);
     }
-    for(let i = 0; i < 6;i++){
-        for(let j = i;j<cellaLista.length;j+=6)
-        {
-            console.log("j: "+j);
-            if(typeof cellaLista[j] != "string"){
-                db += ertekLista[cellaLista[j]-1];
-                //console.log("j: "+j);
-                //console.log(cellaLista[i]-1);
+    console.log("---------Oszlop összegek---------");
+    for(var i = 0; i < 6;i++){
+        var db = 0;
+        for(var j = 1; j < 24;j+=6){
+            for(var k = 0; k < 23;k++){
+                if(ValuesArray[k].id == (i+j) && ValuesArray[k].type == "kártya"){
+                    db += ValuesArray[k].value;
+                    break;
+                }
             }
         }
-        console.log(db);
-        OszlopSzam.innerHTML+=db+";";
-        db = 0;
+        console.log((i+1)+". oszlop: "+db); 
     }
-}
+}*/
 
 function Main()
 {
     JatekterBetoltes();
     JatekterElrendezes();
     TablaGeneralas();
-    TablaFeltoltes(23);//14 és 23 között lehet
+    //eddig jó
 }
-
-var objektum = {id: 1, nev: "Béla", szev: 1467};
-console.log(objektum.id + " "+ objektum.nev);
-objektum.nev = "Karcso";
-console.log(objektum.nev);
-
 Main();
