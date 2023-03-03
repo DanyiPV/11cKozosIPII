@@ -22,13 +22,19 @@ body{
 #kartyabox{
     margin: 2%;
     height: 14vw;
+    border-bottom: 2px solid white;
+}
+#kartyabox img{
+    height: 14vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transition: .8s;
 }
 #pontokbox{
+    border-top: 2px solid white;
     margin: 2%;
     height: 14.7vw;
-    border: 1px solid white;
-    border-radius: 8px;
-    border-style: dotted;
 }
 #tabla{
     width: 50%;
@@ -69,30 +75,45 @@ body{
 #kijelolve{
     border: 2px solid rgb(251, 255, 0);
 }
-#KivalasztoDiv{
+#KozosDiv{
+    display: flex;
     margin-top: 15px;
+    justify-content: space-between;
+}
+#KivalasztoDiv{
     height: 12vw;
     background-color: rgb(61, 61, 61);
     width: 11.5%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
     border: 2px solid white;
-    border-radius: 8px;
+    border-radius: 5px;
     border-style: ridge;
 }
 #KivalasztoDiv img{
     height: 12vw;
     width: 100%;
-    border-radius: 8px;
-}
-#kartyabox img{
-    height: 14vw;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    transition: .8s;
+    border-radius: 5px;
 }
 #KartyabBoxKepHover:hover{
-    height: 16vw;
+    height: 15vw;
+}
+#VarDiv{
+    height: 12vw;
+    width: 35%;
+    border: 2px solid white;
+    background-color: rgb(61, 61, 61);
+    border-radius: 5px;
+}
+#OtosLapok{
+    height: auto;
+    width: 35%;
+    border: 2px solid white;
+    background-color: rgb(61, 61, 61);
+    border-radius: 5px;
+    display: flex;
+
+}
+#Lapok{
+    height: auto;
+    width: 15%;
+    
 }
