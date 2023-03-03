@@ -52,6 +52,7 @@ var VarTag =
 ];
 
 var cellak = [];
+var CellaSzamlalo = 0;
 
 function JatekterBetoltes()
 {
@@ -161,7 +162,7 @@ var RanyomE = false;
 var CellaIndex = 5;
 var CellaIndex2 = 0;
 function OtoskepAttevo(img){
-    if(CellaIndex > 4){
+    if(CellaIndex > 4 && CellaSzamlalo != 30){
         CellaIndex2 = CellaIndex;
     }
     CellaIndex = Math.abs(img.id)-2;
@@ -187,19 +188,19 @@ function CellakRandomizalasa(){
 }
 
 function RandomKivalaszt(){
-    if(RanyomE == false && CellaIndex != 23 && VarIndex == 0){
-        RanyomE = true;
+    if(RanyomE == false && VarIndex == 0 && CellaSzamlalo != 30){
         var Kep = document.createElement("img");
         Kep.id = -1;
         Kep.src = "kartyak/"+cellak[CellaIndex].kartya.id+".png";
         document.getElementById("KivalasztoDiv").appendChild(Kep);
+        RanyomE = true;
     }
 }
 
 var LapDivIndex = -10;
 var LapIndex = -2;
 function KepAtteves(div){
-    if(RanyomE == true && CellaIndex != 23 && VarIndex == 0){
+    if(RanyomE == true && VarIndex == 0 && CellaSzamlalo != 30){
         var index = div.id;
         var kep = document.createElement("img");
         kep.src = "kartyak/"+cellak[CellaIndex].kartya.id+".png";
@@ -207,6 +208,7 @@ function KepAtteves(div){
         document.getElementById(index).appendChild(kep);
         if(CellaIndex > 4){
             document.getElementById("KivalasztoDiv").removeChild(document.getElementById(-1));
+            CellaIndex++;
         }
         else{
             document.getElementById(LapDivIndex-CellaIndex).removeChild(document.getElementById(LapIndex-CellaIndex));
@@ -224,15 +226,13 @@ function KepAtteves(div){
         }
         else{
             RanyomE = false;
-            if(CellaIndex > 4){
-                CellaIndex++;
-            }
         }
         if(CellaIndex == 23){
             document.getElementById("KartyabBoxKepHover").id = "";
         }
+        CellaSzamlalo++;
     }
-    else if(RanyomE == true && CellaIndex != 23 && VarIndex != 0){
+    else if(RanyomE == true && VarIndex != 0 && CellaSzamlalo != 30){
         var index = div.id;
         var kep = document.createElement("img");
         kep.src = "bastyak/"+VarLista[VarIndex-1]+".png";
@@ -241,16 +241,15 @@ function KepAtteves(div){
         document.getElementById(VarIndex+200).removeChild(document.getElementById(VarIndex+100));
         RanyomE = false;
         VarIndex = 0;
+        CellaSzamlalo++;
     }
     if(document.getElementById(-1) != undefined){
         RanyomE = true;
     }
     else{
         RanyomE = false;
-        if(CellaIndex > 4){
-            CellaIndex++;
-        }
     }
+    VarIndex = 0;
 }
 
 
