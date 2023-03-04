@@ -1,7 +1,9 @@
 body{
-    background-color: rgb(32, 32, 32);
+    background-image: url("balpanel_hatter.jpg");
+    background-size: cover;
     color: white;
     transition: .8;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 #jatekter{
@@ -12,12 +14,13 @@ body{
 }
 #balpanel{
     width: 30%;
-    background-image: url("balpanel_hatter.jpg");
+    /*background-image: url("balpanel_hatter.jpg");*/
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     height: auto;
-    border: 1px solid black;
+    border: 1px solid white;
+    background-color: rgba(0, 0, 0, 0.55);
 }
 #kartyabox{
     margin: 2%;
@@ -40,7 +43,7 @@ body{
     width: 50%;
     background-image: url("tabla_hatter.jpg");
     background-size: cover;
-    border: 1px solid black;
+    border: 1px solid white;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -49,9 +52,27 @@ body{
 #korokbox{
     width: 20%;
     height: auto;
-    background-image: url("balpanel_hatter.jpg");
+    /*background-image: url("balpanel_hatter.jpg");*/
     background-size: cover;
-    border: 1px solid black;
+    border: 1px solid white;
+    background-color: rgba(0, 0, 0, 0.55);
+}
+.KorokDivek{
+    margin: 2vw auto;
+    height: 8vw;
+    border: 2px solid white;
+    width: 85%;
+    border-radius: 5px;
+    transition: .8s;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.KorokDivek p{
+    margin-top: 15%;
+    text-align: center;
+    font-size: 3vw;
+}
+.KoredikErtek{
+    color: red;
 }
 .sordiv{
     display: flex;
@@ -60,17 +81,17 @@ body{
 }
 .oszlopdiv{
     border: 1px solid white;
+    height: 5.3vw;
     width: 11.5%;
     margin: 5px;
-    border-radius: 10px;
-    margin-left: auto;
-    margin-right: auto;
+    border-radius: 5px;
+    margin: 1.35vw auto;
     background-color: rgba(0, 0, 0, 0.4);
 }
 .oszlopdiv img{
     width: 100%;
     height: 100%;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 #kijelolve{
     border: 2px solid rgb(251, 255, 0);
@@ -82,16 +103,14 @@ body{
 }
 #KivalasztoDiv{
     height: 12vw;
-    background-color: rgb(61, 61, 61);
+    background-color: rgba(0, 0, 0, 0.6);
     width: 11.5%;
     border: 2px solid white;
-    border-radius: 5px;
     border-style: ridge;
 }
 #KivalasztoDiv img{
     height: 12vw;
     width: 100%;
-    border-radius: 5px;
 }
 #KartyabBoxKepHover:hover{
     height: 15vw;
@@ -100,8 +119,7 @@ body{
     height: 8.5vw;
     width: 40%;
     border: 2px solid white;
-    background-color: rgb(12, 12, 12);
-    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.6);
     display: flex;
 
 }
@@ -110,7 +128,7 @@ body{
     width: 17%;
     margin: auto;
     border: 1px solid white;
-    background-color: rgb(61, 61, 61);
+    background-color: rgb(61, 61, 61, 0.6);
     border-radius: 5px;
 }
 .LapDivek img{
@@ -121,8 +139,7 @@ body{
 #VarDiv{
     width: 35%;
     border: 2px solid white;
-    background-color: rgb(12, 12, 12);
-    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 .VarakKiGensor{
     display: flex;
@@ -133,7 +150,7 @@ body{
     margin: 10px auto;
     border: 1px solid white;
     border-radius: 5px;
-    background-color: rgb(61, 61, 61);
+    background-color: rgb(61, 61, 61, 0.6);
 }
 .KiGenVarDivek img{
     width: 100%;
