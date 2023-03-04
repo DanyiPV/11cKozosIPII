@@ -91,7 +91,7 @@ function TablaGeneralas()
     }
     var KartyaBox = document.getElementById("kartyabox");
     var Kep = document.createElement("img");
-    Kep.src = "lekartya.png";
+    Kep.src = "kartyaamikell.png";
     Kep.setAttribute("onclick","RandomKivalaszt()");
     Kep.id = "KartyabBoxKepHover";
     KartyaBox.appendChild(Kep);
@@ -273,17 +273,25 @@ function KepAtteves(div){
     }
 }
 function KorKigyujt(){
-    if(KorSzamolo != 1){
-        CellaSzamlalo = 0;
-        JatekterBetoltes();
-        JatekterElrendezes();
-        Kiszamolas();
-        KorGen();
+    if(KorSzamolo != 4){
+        if(KorSzamolo != 1){
+            CellaSzamlalo = 0;
+            JatekterBetoltes();
+            JatekterElrendezes();
+            Kiszamolas();
+            KorGen();
+        }
+        else{
+            JatekterBetoltes();
+            JatekterElrendezes();
+            KorGen();
+        }
     }
     else{
         JatekterBetoltes();
         JatekterElrendezes();
         KorGen();
+        ChildTorlesek();
     }
 }
 

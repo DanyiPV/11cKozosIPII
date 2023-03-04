@@ -1,6 +1,8 @@
 body{
     background-image: url("balpanel_hatter.jpg");
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     color: white;
     transition: .8;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -23,21 +25,25 @@ body{
     background-color: rgba(0, 0, 0, 0.55);
 }
 #kartyabox{
-    margin: 2%;
-    height: 14vw;
+    margin: 2% 2% 0 2%;
+    height: 14.7vw;
     border-bottom: 2px solid white;
 }
 #kartyabox img{
-    height: 14vw;
+    margin: 2%;
+    height: 85%;
     display: block;
     margin-left: auto;
     margin-right: auto;
     transition: .8s;
 }
+#KartyabBoxKepHover:hover{
+    height: 100%;
+}
 #pontokbox{
     border-top: 2px solid white;
-    margin: 2%;
-    height: 14.7vw;
+    margin: 0 2% 2% 2%;
+    height: 14vw;
 }
 #tabla{
     width: 50%;
@@ -58,7 +64,7 @@ body{
     background-color: rgba(0, 0, 0, 0.55);
 }
 .KorokDivek{
-    margin: 2vw auto;
+    margin: 1.8vw auto 1.5vw auto;
     height: 8vw;
     border: 2px solid white;
     width: 85%;
@@ -77,7 +83,6 @@ body{
 .sordiv{
     display: flex;
     flex-direction: row;
-    height: 6vw;
 }
 .oszlopdiv{
     border: 1px solid white;
@@ -85,7 +90,7 @@ body{
     width: 11.5%;
     margin: 5px;
     border-radius: 5px;
-    margin: 1.35vw auto;
+    margin: .5vw auto;
     background-color: rgba(0, 0, 0, 0.4);
 }
 .oszlopdiv img{
@@ -111,9 +116,6 @@ body{
 #KivalasztoDiv img{
     height: 12vw;
     width: 100%;
-}
-#KartyabBoxKepHover:hover{
-    height: 15vw;
 }
 #OtosLapok{
     height: 8.5vw;
