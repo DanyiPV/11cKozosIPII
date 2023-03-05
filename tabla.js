@@ -239,13 +239,13 @@ function ertekCheckDebug()
     console.log(kezLista);
     console.log(varKeszletLista);
     console.log(tablaKartyaLista);*/
-    console.log(lerakottKartyaLista);
-    console.log(KorValtasDB);
+    //console.log(lerakottKartyaLista);
+    //console.log(KorValtasDB);
 }
 
 function kepLerakas(div)
 {
-    console.log(kivalasztottKartya);
+    //console.log(kivalasztottKartya);
     if(vanEkivalasztva == true)
     {
         //Kép generálás
@@ -268,8 +268,9 @@ function kepLerakas(div)
         if(KorValtasDB ==30)
         {
             console.log("Tábla tele, következő kör");
-            ChildTorlesek();
-            KorKigyujt();
+            //ChildTorlesek();
+            //KorKigyujt();
+            Kiszamolas();
             vanEkivalasztva = false;
             CellaSzamlalo = 5;
             kezLista = new Array(5);
@@ -332,7 +333,6 @@ function KorKigyujt(){
     if(KorSzamolo < 4){
         if(KorSzamolo != 1){
             CellaSzamlalo = 0;
-            Kiszamolas();
             KorGen();
         }
         else{
@@ -365,8 +365,64 @@ function ChildTorlesek(){
 }
 
 function Kiszamolas(){
-    console.log("Sor-Oszlop kiszámolás");
-    //Ezt még meg kell írni
+    //Test íras
+    let klista = lerakottKartyaLista;
+    console.log(klista);
+    for(let i = 1; i < 7;i += 6){
+        let vdb = 0;
+        let db = 0;
+        for(let j = i; j < i+6;j++){
+            SarkanyVanE(i);
+            if(klista[j][0] != "v" && KartyakTag[klista[j]-1].sign != 'hegy'){
+                if(KartyakTag[klista[j]-1].sign == 'taliga'){
+                    vdb += 2;
+                }
+                else if(KartyakTag[klista[j]-1].sign == 'pap'){
+                    /*if(i-1 > -1 && klista[i-1] != String && klista[i-1][0] == "v"){
+                        vdb += 1;
+                    }
+                    else if(i+1 < 31 && klista[i+1] != String && klista[i+1][0] == "v"){
+                        vdb += 1;
+                    }
+                    else if(i-6 > -1 && klista[i-6] != String && klista[i-6][0] == "v"){
+                        vdb += 1;
+                    }
+                    else if(i+6 < 31 && klista[i+6] != String && klista[i+6][0] == "v"){
+                        vdb += 1;
+                    }*/ // Ez a része valamiért nem akar működni
+                }
+                else{
+                    console.log(KartyakTag[klista[j]-1].value);
+                    db += KartyakTag[klista[j]-1].value;
+                }
+            }
+            else if(klista[j][0] == "v"){
+                vdb += VarLista[klista[j][1]];
+            }
+            else{
+                //Ide jön majd a hegy
+            }
+        }
+        var SorOsszeg = 0;
+        if(vdb != 0){
+            SorOsszeg = db*vdb;
+        }
+        else{
+            SorOsszeg = db;
+        }
+        console.log("Sor összeg: ",SorOsszeg);
+    }
+}
+
+function SarkanyVanE(index){
+    for(let i = index; i < index+6; i++){
+        if(lerakottKartyaLista[i][0] != "v" && KartyakTag[lerakottKartyaLista[i]-1].sign == 'sárkány'){
+            for(let k = index; k < index+6;k++){
+                lerakottKartyaLista[k] = undefined;
+            }
+        }
+        break;
+    }
 }
 
 function Logo(){
