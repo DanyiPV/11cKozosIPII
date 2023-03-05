@@ -143,6 +143,11 @@ function VarakGen(){
             var Kep = document.createElement("img");
             Kep.setAttribute("onclick","kepFelveves("+Indexe+",this,'vár')");
             Kep.id = "v"+Indexe;
+            let Objekt = {};
+            Objekt.id = VarLista[Indexe]
+            Objekt.value = 0;
+            Objekt.type = "vár";
+            varKeszletLista.push(Objekt);
             Kep.src = "bastyak/"+VarLista[Indexe++]+".png";
             KiGenVarDivek.appendChild(Kep);
             VarakKiGensor.appendChild(KiGenVarDivek);
@@ -216,7 +221,7 @@ function kepKeszites(kartyaObjekt)
     console.log(kartyaObjekt);
     if(kartyaObjekt.type == "vár")
     {
-        kep.src= "bastyak/"+kartyaObjekt.kartya.id+".png";
+        kep.src= "bastyak/"+kartyaObjekt.id+".png";
     }
     else
     {
@@ -228,7 +233,7 @@ function kepKeszites(kartyaObjekt)
 function kepLerakas(div)
 {
     console.log(kivalasztottKartya);
-    var mentes = kivalasztottKartya;//Valamiárt szarakodik
+    var mentes = kivalasztottKartya;//Valamiért szarakodik
     if(vanEkivalasztva == true)
     {
         //Kép generálás
@@ -236,7 +241,7 @@ function kepLerakas(div)
         var kep = kepKeszites(mentes);
         div.appendChild(kep);
         //Kiválasztás törlés
-        document.getElementById("KivalasztoDiv").innerHTML = "";
+        document.getElementById("KivalasztoDiv").removeChild(document.getElementById("KivalasztoDiv").firstChild);
         lerakottKartyaLista.splice(div.id);
         kezbenLevoKartyakSzama--;
         if(CellaSzamlalo==30)
@@ -255,7 +260,7 @@ function kepLerakas(div)
     }
     else
     {
-        console.log("Még nincs kiválsztva kártya");
+        console.log("Még nincs kiválsztva kártya"); 
     }
 }
 var hatterKartyaLepteto = 0;
