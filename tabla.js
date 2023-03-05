@@ -199,13 +199,7 @@ function elsoOtKepKirakas(){
 }
 
 var vanEkivalasztva = false;
-/*function OtoskepAttevo(img){
-    if(CellaIndex > 4 && CellaSzamlalo != 30){
-        CellaIndex2 = CellaIndex;
-    }
-    CellaIndex = Math.abs(img.id)-2;
-    RanyomE = true;
-}*/
+
 
 function CellakRandomizalasa(){
     //Kártya tagek randomizálása
@@ -225,15 +219,6 @@ function CellakRandomizalasa(){
     }
 }
 
-/*function RandomKivalaszt(){
-    if(RanyomE == false && VarIndex == 0 && CellaSzamlalo < 30){
-        var Kep = document.createElement("img");
-        Kep.id = -1;
-        Kep.src = "kartyak/"+cellak[CellaIndex].kartya.id+".png";
-        document.getElementById("KivalasztoDiv").appendChild(Kep);
-        RanyomE = true;
-    }
-}*/
 function kepKeszites(kartyaObjekt)
 {
     ertekCheckDebug();
@@ -292,6 +277,7 @@ function kepLerakas(div)
             tablaKartyaLista = [];
             lerakottKartyaLista = new Array(30);
             KorValtasDB = 0;
+            KorSzamolo++;
         }
         kivalasztottKartya = undefined;
     }
@@ -341,76 +327,9 @@ function huzas()
         CellaSzamlalo++;
     }
 }
-//Boccs hogy kikommenteztem, úgy voltam vele hogy inkább átszedtem onnan azokat a részeket amik jók voltak, és akkor az indexeléseket így könnyeben köré tudtam írni
-/*
-var LapDivIndex = -10;
-var LapIndex = -2;
-function KepAtteves(div){
-    if(RanyomE == true && VarIndex == 0 && CellaSzamlalo < 30){
-        var index = div.id;
-        var kep = document.createElement("img");
-        kep.src = "kartyak/"+cellak[CellaIndex].kartya.id+".png";
-        document.getElementById(index).removeAttribute("onclick");
-        document.getElementById(index).appendChild(kep);
-        if(CellaIndex > 4){
-            document.getElementById("KivalasztoDiv").removeChild(document.getElementById(-1));
-            CellaIndex++;
-        }
-        else{
-            document.getElementById(LapDivIndex-CellaIndex).removeChild(document.getElementById(LapIndex-CellaIndex));
-            if(CellaIndex2 > 4){
-                CellaIndex = CellaIndex2;
-                CellaIndex2 = 0;
-            }
-            else{
-                CellaIndex = 5;
-            }
-            RanyomE = true;
-        }
-        if(document.getElementById(-1) != undefined){
-            RanyomE = true;
-        }
-        else{
-            RanyomE = false;
-        }
-        if(CellaIndex == 23){
-            document.getElementById("KartyabBoxKepHover").removeAttribute("onclick");
-            document.getElementById("KartyabBoxKepHover").id = "";
-            CellaIndex = 0;
-        }
-        CellaSzamlalo++;
-    }
-    else if(RanyomE == true && VarIndex != 0 && CellaSzamlalo != 30){
-        var index = div.id;
-        var kep = document.createElement("img");
-        kep.src = "bastyak/"+VarLista[VarIndex-1]+".png";
-        document.getElementById(index).removeAttribute("onclick");
-        document.getElementById(index).appendChild(kep);
-        document.getElementById(VarIndex+200).removeChild(document.getElementById(VarIndex+100));
-        RanyomE = false;
-        VarIndex = 0;
-        CellaSzamlalo++;
-    }
-    if(document.getElementById(-1) != undefined){
-        RanyomE = true;
-    }
-    else{
-        RanyomE = false;
-    }
-    VarIndex = 0;
-    if(CellaSzamlalo == 30){
-        ChildTorlesek();
-        KorKigyujt();
-        CellaIndex = 5;
-        CellaIndex2 = 0;
-        RanyomE = false;
-    }
-}*/
+
 function KorKigyujt(){
-    JatekterBetoltes();
-    JatekterElrendezes();
-    AlapPontokBox();
-    if(KorSzamolo != 4){
+    if(KorSzamolo < 4){
         if(KorSzamolo != 1){
             CellaSzamlalo = 0;
             Kiszamolas();
@@ -462,6 +381,9 @@ function Logo(){
 
 function Main()
 {
+    JatekterBetoltes();
+    JatekterElrendezes();
+    AlapPontokBox();
     KorKigyujt();
 }
 Main();
