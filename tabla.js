@@ -1,4 +1,7 @@
-var jatekTer = document.getElementById("jatekter");
+Logo();
+var jatekTer = document.createElement("div");
+jatekTer.id = "jatekter";
+document.body.appendChild(jatekTer);
 
 var balPanel = document.createElement("div");
 var kartyaBox = document.createElement("div");
@@ -57,8 +60,9 @@ var kezLista = new Array(5);
 var kezbenLevoKartyakSzama = 5;
 var varKeszletLista = []; //A bal lent lévő várak listája
 var kivalasztottKartya;
-var CellaSzamlalo = 5; //Hány lerakott kártya van
+var CellaSzamlalo = 5; //Hány lerakott kártya van - Ez a kör váltáshoz nem működik
 var KorSzamolo = 1;
+var KorValtasDB = 0; //Kör váltáshoz a db számláló
 
 function JatekterBetoltes()
 {
@@ -105,13 +109,29 @@ function TablaGeneralas()
 
 function KorokBoxGen(){
     var KorokBox = document.getElementById("korokbox");
+    var KorokSorDiv = document.createElement("div");
+    KorokSorDiv.id = "KorokSorDiv";
     for(let i = 0; i < 3;i++){
         var KorokDivek = document.createElement("div");
         KorokDivek.classList = "KorokDivek";
         KorokDivek.id = "K"+(i+1);
         KorokDivek.innerHTML = "<p>"+(i+1)+". Kör</p>";
-        KorokBox.appendChild(KorokDivek);
+        KorokSorDiv.appendChild(KorokDivek);
     }
+    KorokBox.appendChild(KorokSorDiv);
+}
+
+function AlapPontokBox(){
+    let PontokBox = document.getElementById("pontokbox");
+    let PontokSorDiv = document.createElement("div");
+    PontokSorDiv.id = "PontokSorDiv";
+    let PontokDiv = document.createElement("div");
+    PontokDiv.className = "PontokDiv";
+    let Kep = document.createElement("img");
+    Kep.src = "ermek/50.png";
+    PontokDiv.appendChild(Kep   );
+    PontokSorDiv.appendChild(PontokDiv);
+    PontokBox.appendChild(PontokSorDiv);
 }
 
 function KozosDivek(){
@@ -203,7 +223,6 @@ function CellakRandomizalasa(){
         cella.kartya = KartyakTag[random];
         tablaKartyaLista.push(cella);
     }
-    console.log(tablaKartyaLista);
 }
 
 /*function RandomKivalaszt(){
@@ -231,11 +250,12 @@ function kepKeszites(kartyaObjekt)
 }
 function ertekCheckDebug()
 {
-    console.log(kivalasztottKartya);
+    /*console.log(kivalasztottKartya);
     console.log(kezLista);
     console.log(varKeszletLista);
-    console.log(tablaKartyaLista);
+    console.log(tablaKartyaLista);*/
     console.log(lerakottKartyaLista);
+    console.log(KorValtasDB);
 }
 
 function kepLerakas(div)
@@ -248,6 +268,7 @@ function kepLerakas(div)
         var kep = kepKeszites(kivalasztottKartya);
         div.removeAttribute("onclick");
         div.appendChild(kep);
+        KorValtasDB++;
         //Kiválasztás törlés
         document.getElementById("KivalasztoDiv").removeChild(document.getElementById("KivalasztoDiv").firstChild);
         if(kivalasztottKartya.type == "kártya")
@@ -259,7 +280,7 @@ function kepLerakas(div)
         {
             lerakottKartyaLista.splice(div.id,1,"v"+kivalasztottKartya.id);
         }
-        if(CellaSzamlalo==30)
+        if(KorValtasDB ==30)
         {
             console.log("Tábla tele, következő kör");
             ChildTorlesek();
@@ -270,6 +291,7 @@ function kepLerakas(div)
             hatterKartyaLepteto = 0;
             tablaKartyaLista = [];
             lerakottKartyaLista = new Array(30);
+            KorValtasDB = 0;
         }
         kivalasztottKartya = undefined;
     }
@@ -294,7 +316,6 @@ function kepFelveves(index,kep,fajta)
         }
         else
         {
-            console.log(index+" ez a szar");
             kivalasztottKartya = varKeszletLista[index];
             varKeszletLista.splice(index,1,undefined);
         }
@@ -302,7 +323,6 @@ function kepFelveves(index,kep,fajta)
 }
 function huzas()
 {
-    console.log(CellaSzamlalo);
     if(vanEkivalasztva == false && CellaSzamlalo < 23 && kezbenLevoKartyakSzama<5){
         //Azért van ez külön mert most nem akardtam cseszekedeni hogy a kirajzolást használja itt is, mert ezzel nem kompatibilis
         var Kep = document.createElement("img");
@@ -312,7 +332,6 @@ function huzas()
         {
             i++;
         }
-        console.log(i);
         var slot = document.getElementById("o"+i);
         Kep.setAttribute("onclick","kepFelveves("+i+",this,'kártya')");
         slot.appendChild(Kep);
@@ -390,6 +409,7 @@ function KepAtteves(div){
 function KorKigyujt(){
     JatekterBetoltes();
     JatekterElrendezes();
+    AlapPontokBox();
     if(KorSzamolo != 4){
         if(KorSzamolo != 1){
             CellaSzamlalo = 0;
@@ -421,14 +441,23 @@ function ChildTorlesek(){
         document.getElementById("tabla").removeChild(document.getElementById("tabla").firstChild);
     }
     document.body.removeChild(document.getElementById("KozosDiv"));
-    for(let i = 0; i < 3; i++){
-        document.getElementById("korokbox").removeChild(document.getElementById("korokbox").firstChild);
-    }
+    document.getElementById("korokbox").removeChild(document.getElementById("korokbox").firstChild);
+    document.getElementById("pontokbox").removeChild(document.getElementById("pontokbox").firstChild);
 }
 
 function Kiszamolas(){
     console.log("Sor-Oszlop kiszámolás");
     //Ezt még meg kell írni
+}
+
+function Logo(){
+    let Kep = document.createElement("img");
+    let KepDiv = document.createElement("div");
+    KepDiv.id = "LogoDiv";
+    Kep.src = "Logo.png";
+    Kep.id = "Logo";
+    KepDiv.appendChild(Kep);
+    document.body.appendChild(KepDiv);
 }
 
 function Main()
