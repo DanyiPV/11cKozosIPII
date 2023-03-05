@@ -144,7 +144,7 @@ function VarakGen(){
             Kep.setAttribute("onclick","kepFelveves("+Indexe+",this,'vár')");
             Kep.id = "v"+Indexe;
             let Objekt = {};
-            Objekt.id = VarLista[Indexe]
+            Objekt.id = VarLista[Indexe];
             Objekt.value = 0;
             Objekt.type = "vár";
             varKeszletLista.push(Objekt);
@@ -266,19 +266,21 @@ function kepLerakas(div)
 var hatterKartyaLepteto = 0;
 function kepFelveves(index,kep,fajta)
 {
-    kep.removeAttribute("onclick");
-    vanEkivalasztva = true;
-    var div = document.getElementById("KivalasztoDiv");
-    div.appendChild(kep);
-    if(fajta != "vár")
-    {
-        kivalasztottKartya = kezLista[index];
-        kezLista.splice(index,1,undefined);
-    }
-    else
-    {
-        kivalasztottKartya = varKeszletLista[index];
-        kezLista.splice(index,1);
+    if(document.getElementById("KivalasztoDiv").firstChild == undefined){
+        kep.removeAttribute("onclick");
+        vanEkivalasztva = true;
+        var div = document.getElementById("KivalasztoDiv");
+        div.appendChild(kep);
+        if(fajta != "vár")
+        {
+            kivalasztottKartya = kezLista[index];
+            kezLista.splice(index,1,undefined);
+        }
+        else
+        {
+            kivalasztottKartya = varKeszletLista[index];
+            kezLista.splice(index,1);
+        }
     }
 }
 function huzas()
