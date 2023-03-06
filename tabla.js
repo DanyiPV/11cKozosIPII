@@ -367,7 +367,7 @@ function ChildTorlesek(){
 function Kiszamolas(){
     //Test íras
     let klista = lerakottKartyaLista;
-    console.log(klista);
+    HegyLeSzamolas();
     for(let i = 1; i < klista.length;i += 6){
         let vdb = 0;
         let db = 0;
@@ -419,6 +419,16 @@ function SarkanyVanE(index){
             }
         }
         break;
+    }
+}
+
+function HegyLeSzamolas(){
+    for(let i = 1; i < lerakottKartyaLista.length;i+=6){
+        for(let j = i; j < i+6;j++){
+            if(lerakottKartyaLista[j].type != "vár" && lerakottKartyaLista[j].kartya.sign == "hegy"){
+                console.log(i +". értéken van a hegy");
+            }
+        }
     }
 }
 
