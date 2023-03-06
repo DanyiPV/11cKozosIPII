@@ -57,7 +57,6 @@ var VarTag =
 var tablaKartyaLista = []; //Ki generált DE még nem lerakott kártyák (pakli)
 var lerakottKartyaLista = new Array(30); //Lerakott
 var kezLista = new Array(1);
-var kezbenLevoKartyakSzama = 1;
 var varKeszletLista = []; //A bal lent lévő várak listája
 var kivalasztottKartya;
 var CellaSzamlalo = 5; //Hány lerakott kártya van - Ez a kör váltáshoz nem működik
@@ -108,17 +107,21 @@ function TablaGeneralas()
 }
 
 function KorokBoxGen(){
-    var KorokBox = document.getElementById("korokbox");
-    var KorokSorDiv = document.createElement("div");
+    let KorokBox = document.getElementById("korokbox");
+    let KorokSorDiv = document.createElement("div");
     KorokSorDiv.id = "KorokSorDiv";
     for(let i = 0; i < 3;i++){
-        var KorokDivek = document.createElement("div");
+        let KorokDivek = document.createElement("div");
         KorokDivek.classList = "KorokDivek";
         KorokDivek.id = "K"+(i+1);
         KorokDivek.innerHTML = "<p>"+(i+1)+". Kör</p>";
         KorokSorDiv.appendChild(KorokDivek);
     }
     KorokBox.appendChild(KorokSorDiv);
+    let PassDiv = document.createElement("div");
+    PassDiv.id = "PassDiv";
+    PassDiv.innerHTML = "<p>Passz</p>";
+    KorokBox.appendChild(PassDiv);
 }
 
 function AlapPontokBox(){
@@ -129,7 +132,7 @@ function AlapPontokBox(){
     PontokDiv.className = "PontokDiv";
     let Kep = document.createElement("img");
     Kep.src = "ermek/50.png";
-    PontokDiv.appendChild(Kep   );
+    PontokDiv.appendChild(Kep);
     PontokSorDiv.appendChild(PontokDiv);
     PontokBox.appendChild(PontokSorDiv);
 }
@@ -253,7 +256,6 @@ function kepLerakas(div)
         if(kivalasztottKartya.type == "kártya")
         {
             lerakottKartyaLista.splice(div.id-1,1,kivalasztottKartya);
-            kezbenLevoKartyakSzama = 0;
         }
         else
         {
@@ -282,7 +284,8 @@ function kepLerakas(div)
     }
 }
 var hatterKartyaLepteto = 0;
-function kepFelveves(index,kep,fajta)
+
+function kepFelveves(index,kep)
 {
     if(vanEkivalasztva == false)
     {
@@ -290,35 +293,21 @@ function kepFelveves(index,kep,fajta)
         vanEkivalasztva = true;
         var div = document.getElementById("KivalasztoDiv");
         div.appendChild(kep);
-        if(fajta != "vár")
-        {
-            kivalasztottKartya = kezLista[index];
-            kezLista.splice(index,1,undefined);
-        }
-        else
-        {
-            kivalasztottKartya = varKeszletLista[index];
-            varKeszletLista.splice(index,1,undefined);
-        }
+        kivalasztottKartya = kezLista[index];
+        kezLista = new Array(1); 
     }
 }
 function huzas()
 {
-    if(vanEkivalasztva == false && hatterKartyaLepteto != tablaKartyaLista.length && kezbenLevoKartyakSzama<1){
+    if(vanEkivalasztva == false && hatterKartyaLepteto != tablaKartyaLista.length){
         //Azért van ez külön mert most nem akardtam cseszekedeni hogy a kirajzolást használja itt is, mert ezzel nem kompatibilis
         var Kep = document.createElement("img");
         Kep.src = "kartyak/"+tablaKartyaLista[hatterKartyaLepteto].kartya.id+".png";
-        let i = 0;
-        while(kezLista[i]!=undefined)
-        {
-            i++;
-        }
-        var slot = document.getElementById("o"+0);
-        Kep.setAttribute("onclick","kepFelveves("+i+",this,'kártya')");
+        var slot = document.getElementById("KivalasztoDiv");
         slot.appendChild(Kep);
-        kezLista[i] = tablaKartyaLista[hatterKartyaLepteto];
+        vanEkivalasztva = true;
+        kivalasztottKartya = tablaKartyaLista[hatterKartyaLepteto];
         hatterKartyaLepteto++;
-        kezbenLevoKartyakSzama = 1;
         CellaSzamlalo++;
     }
 }
@@ -357,9 +346,6 @@ function ChildTorlesek(){
     document.getElementById("korokbox").removeChild(document.getElementById("korokbox").firstChild);
     document.getElementById("pontokbox").removeChild(document.getElementById("pontokbox").firstChild);
 }
-/*Kiszanolás rendszer:
-soronként oszloponként megyünk, 1-1 function az általnos oszlop és sor számításra, ha van különleges kártya akkor nem ez van meg hívva hanem a kártyátúl függő function ami saját szabályai alaoján számol
-*/ 
 function Kiszamolas(){
     //Test íras
     TeljesDB = 0;
@@ -496,13 +482,8 @@ function Taliga(){
     }
     if(igaze == true){
         for(let i = index; i < index+6;i++){
-            if(lerakottKartyaLista[i].type == "kártya" && lerakottKartyaLista[i].kartya.value > 0){
-                lerakottKartyaLista[i].kartya.value++;
-                break;
-            }
-            else if(lerakottKartyaLista[i].type == "kártya" && lerakottKartyaLista[i].kartya.value < 0){
-                lerakottKartyaLista[i].kartya.value--;
-                break;
+            if(lerakottKartyaLista[i].type == "kártya"){
+                lerakottKartyaLista[i].kartya.value = lerakottKartyaLista[i].kartya.value*2;
             }
         }
     }
@@ -517,13 +498,8 @@ function Taliga(){
     }
     if(igaze == true){
         for(let i = index; i < lerakottKartyaLista.length;i += 6)
-        if(lerakottKartyaLista[i].type == "kártya" && lerakottKartyaLista[i].kartya.value > 0){
-            lerakottKartyaLista[i].kartya.value++;
-            break;
-        }
-        else if(lerakottKartyaLista[i].type == "kártya" && lerakottKartyaLista[i].kartya.value < 0){
-            lerakottKartyaLista[i].kartya.value--;
-            break;
+        if(lerakottKartyaLista[i].type == "kártya"){
+            lerakottKartyaLista[i].kartya.value = lerakottKartyaLista[i].kartya.value*2;
         }
     }
 }
