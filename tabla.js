@@ -56,7 +56,7 @@ var VarTag =
 
 var tablaKartyaLista = []; //Ki generált DE még nem lerakott kártyák (pakli)
 var lerakottKartyaLista = new Array(30); //Lerakott
-var kezLista = new Array(5);
+var kezLista = new Array(1);
 var kezbenLevoKartyakSzama = 5;
 var varKeszletLista = []; //A bal lent lévő várak listája
 var kivalasztottKartya;
@@ -178,7 +178,7 @@ function VarakGen(){
 
 function elsoKepKirakas(){
     var OtosLapok= document.getElementById("OtosLapok");
-    for(let i = 0; i < 5; i++){
+    for(let i = 0; i < 1; i++){
         kezLista[i] = tablaKartyaLista[hatterKartyaLepteto];
         var LapDivek = document.createElement("div");
         LapDivek.className = "LapDivek";
@@ -267,7 +267,7 @@ function kepLerakas(div)
             Kiszamolas();
             vanEkivalasztva = false;
             CellaSzamlalo = 5;
-            kezLista = new Array(5);
+            kezLista = new Array(1);
             hatterKartyaLepteto = 0;
             tablaKartyaLista = [];
             lerakottKartyaLista = new Array(30);
@@ -386,7 +386,7 @@ function Kiszamolas(){
         else{
             SorOsszeg = db;
         }
-        console.log("Sor összeg: ",SorOsszeg);
+        //console.log("Sor összeg: ",SorOsszeg);
         TeljesDB += SorOsszeg;
     }
     for(let i = 0; i < 6;i++){
@@ -407,10 +407,11 @@ function Kiszamolas(){
         else{
             OszlopOsszeg = db;
         }
-        console.log("OSzlop összeg: ",OszlopOsszeg);
+        //console.log("OSzlop összeg: ",OszlopOsszeg);
         TeljesDB += OszlopOsszeg;
     }
-    console.log(lerakottKartyaLista);
+    //console.log(lerakottKartyaLista);
+    console.log("A teljes összeg: "+TeljesDB);
 }
 
 function SarkanyVanE(){

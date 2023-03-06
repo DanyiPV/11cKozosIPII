@@ -144,19 +144,21 @@ body{
     justify-content: space-between;
 }
 #KivalasztoDiv{
-    height: 12vw;
+    height: 10vw;
     background-color: rgba(0, 0, 0, 0.6);
-    width: 11.5%;
+    width: 9.5%;
     border: 2px solid white;
     border-style: ridge;
 }
 #KivalasztoDiv img{
-    height: 12vw;
+    height: 10vw;
     width: 100%;
 }
 #OtosLapok{
-    height: 8.5vw;
-    width: 40%;
+    margin-right: 10.7%;
+    margin-left: 10%;
+    height: 10vw;
+    width: 9%;
     border: 2px solid white;
     background-color: rgba(0, 0, 0, 0.6);
     display: flex;
@@ -164,7 +166,7 @@ body{
 }
 .LapDivek{
     height: 7vw;
-    width: 17%;
+    width: 75%;
     margin: auto;
     border: 1px solid white;
     background-color: rgb(61, 61, 61, 0.6);
@@ -184,8 +186,8 @@ body{
     display: flex;
 }
 .KiGenVarDivek{
-    height: 5vw;
-    width: 15%;
+    height: 4vw;
+    width: 12%;
     margin: 10px auto;
     border: 1px solid white;
     border-radius: 5px;
