@@ -6,7 +6,6 @@ body{
     color: white;
     transition: .8;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    overflow: hidden;
 }
 #LogoDiv{
     width: 35%;
@@ -141,7 +140,7 @@ body{
 }
 #KozosDiv{
     display: flex;
-    margin-top: 5px;
+    margin-top: 15px;
     justify-content: space-between;
 }
 #KivalasztoDiv{
