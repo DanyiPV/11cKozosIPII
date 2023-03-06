@@ -57,7 +57,7 @@ var VarTag =
 var tablaKartyaLista = []; //Ki generált DE még nem lerakott kártyák (pakli)
 var lerakottKartyaLista = new Array(30); //Lerakott
 var kezLista = new Array(1);
-var kezbenLevoKartyakSzama = 5;
+var kezbenLevoKartyakSzama = 1;
 var varKeszletLista = []; //A bal lent lévő várak listája
 var kivalasztottKartya;
 var CellaSzamlalo = 5; //Hány lerakott kártya van - Ez a kör váltáshoz nem működik
@@ -253,7 +253,7 @@ function kepLerakas(div)
         if(kivalasztottKartya.type == "kártya")
         {
             lerakottKartyaLista.splice(div.id-1,1,kivalasztottKartya);
-            kezbenLevoKartyakSzama--;
+            kezbenLevoKartyakSzama = 0;
         }
         else
         {
@@ -304,7 +304,7 @@ function kepFelveves(index,kep,fajta)
 }
 function huzas()
 {
-    if(vanEkivalasztva == false && CellaSzamlalo < 23 && kezbenLevoKartyakSzama<5){
+    if(vanEkivalasztva == false && hatterKartyaLepteto != tablaKartyaLista.length && kezbenLevoKartyakSzama<1){
         //Azért van ez külön mert most nem akardtam cseszekedeni hogy a kirajzolást használja itt is, mert ezzel nem kompatibilis
         var Kep = document.createElement("img");
         Kep.src = "kartyak/"+tablaKartyaLista[hatterKartyaLepteto].kartya.id+".png";
@@ -313,12 +313,12 @@ function huzas()
         {
             i++;
         }
-        var slot = document.getElementById("o"+i);
+        var slot = document.getElementById("o"+0);
         Kep.setAttribute("onclick","kepFelveves("+i+",this,'kártya')");
         slot.appendChild(Kep);
         kezLista[i] = tablaKartyaLista[hatterKartyaLepteto];
         hatterKartyaLepteto++;
-        kezbenLevoKartyakSzama++;
+        kezbenLevoKartyakSzama = 1;
         CellaSzamlalo++;
     }
 }
@@ -410,7 +410,7 @@ function Kiszamolas(){
         //console.log("OSzlop összeg: ",OszlopOsszeg);
         TeljesDB += OszlopOsszeg;
     }
-    //console.log(lerakottKartyaLista);
+    console.log(lerakottKartyaLista);
     console.log("A teljes összeg: "+TeljesDB);
 }
 
@@ -480,38 +480,50 @@ function PapVarNov(){
             } 
         }
     }
-    console.log(lerakottKartyaLista);
 }
 
 function Taliga(){
     //sor
+    let index = 0;
+    let igaze = false;
     for(let i = 0; i < lerakottKartyaLista.length; i+=6){
         for(let j = i; j < i+6; j++){
-            if(lerakottKartyaLista[j].type == "kártya"){
-                if(lerakottKartyaLista[j].kartya.value > 0){
-                    lerakottKartyaLista[j].kartya.value++;
-                    break;
-                }
-                else if(lerakottKartyaLista[j].kartya.value < 0){
-                    lerakottKartyaLista[j].kartya.value--;
-                    break;
-                }
+            if(lerakottKartyaLista[j].type == "kártya" && lerakottKartyaLista[j].kartya.sign == "taliga"){
+                index = i;
+                igaze = true;
+            }
+        }
+    }
+    if(igaze == true){
+        for(let i = index; i < index+6;i++){
+            if(lerakottKartyaLista[i].type == "kártya" && lerakottKartyaLista[i].kartya.value > 0){
+                lerakottKartyaLista[i].kartya.value++;
+                break;
+            }
+            else if(lerakottKartyaLista[i].type == "kártya" && lerakottKartyaLista[i].kartya.value < 0){
+                lerakottKartyaLista[i].kartya.value--;
+                break;
             }
         }
     }
     //oszlop
+    index = 0;
+    igaze = false;
     for(let i = 0; i < 6; i++){
         for(let j = i; j < lerakottKartyaLista.length; j += 6){
-            if(lerakottKartyaLista[j].type == "kártya"){
-                if(lerakottKartyaLista[j].kartya.value > 0){
-                    lerakottKartyaLista[j].kartya.value++;
-                    break;
-                }
-                else if(lerakottKartyaLista[j].kartya.value < 0){
-                    lerakottKartyaLista[j].kartya.value--;
-                    break;
-                }
-            }
+            index = i;
+            igaze = true;
+        }
+    }
+    if(igaze == true){
+        for(let i = index; i < lerakottKartyaLista.length;i += 6)
+        if(lerakottKartyaLista[i].type == "kártya" && lerakottKartyaLista[i].kartya.value > 0){
+            lerakottKartyaLista[i].kartya.value++;
+            break;
+        }
+        else if(lerakottKartyaLista[i].type == "kártya" && lerakottKartyaLista[i].kartya.value < 0){
+            lerakottKartyaLista[i].kartya.value--;
+            break;
         }
     }
 }
