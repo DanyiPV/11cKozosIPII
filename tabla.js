@@ -235,11 +235,11 @@ function kepKeszites(kartyaObjekt)
 }
 function ertekCheckDebug()
 {
-    /*console.log(kivalasztottKartya);
-    console.log(kezLista);
-    console.log(varKeszletLista);
-    console.log(tablaKartyaLista);*/
-    //console.log(lerakottKartyaLista);
+    //console.log(kivalasztottKartya);
+    //console.log(kezLista);
+    //console.log(varKeszletLista);
+    console.log(tablaKartyaLista);
+    console.log(lerakottKartyaLista);
     //console.log(KorValtasDB);
 }
 
@@ -258,12 +258,12 @@ function kepLerakas(div)
         document.getElementById("KivalasztoDiv").removeChild(document.getElementById("KivalasztoDiv").firstChild);
         if(kivalasztottKartya.type == "kártya")
         {
-            lerakottKartyaLista.splice(div.id,1,kivalasztottKartya.id);
+            lerakottKartyaLista.splice(div.id,1,kivalasztottKartya);
             kezbenLevoKartyakSzama--;
         }
         else
         {
-            lerakottKartyaLista.splice(div.id,1,"v"+kivalasztottKartya.id);
+            lerakottKartyaLista.splice(div.id,1,"v"+kivalasztottKartya);
         }
         if(KorValtasDB ==30)
         {
@@ -378,7 +378,7 @@ function Kiszamolas(){
                     vdb += 2;
                 }
                 else if(KartyakTag[klista[j]-1].sign == 'pap'){
-                    /*if(i-1 > -1 && klista[i-1] != String && klista[i-1][0] == "v"){
+                    if(i-1 > -1 && klista[i-1] != String && klista[i-1][0] == "v"){
                         vdb += 1;
                     }
                     else if(i+1 < 31 && klista[i+1] != String && klista[i+1][0] == "v"){
@@ -389,7 +389,7 @@ function Kiszamolas(){
                     }
                     else if(i+6 < 31 && klista[i+6] != String && klista[i+6][0] == "v"){
                         vdb += 1;
-                    }*/ // Ez a része valamiért nem akar működni
+                    } // Ez a része valamiért nem akar működni
                 }
                 else{
                     console.log(KartyakTag[klista[j]-1].value);
