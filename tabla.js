@@ -147,7 +147,7 @@ function KozosDivek(){
     var OtosLapok= document.createElement("div");
     OtosLapok.id = "OtosLapok";
     KozosDiv.appendChild(OtosLapok);
-    elsoOtKepKirakas();
+    elsoKepKirakas();
     VarakGen();
 }
 var VarLista = [1,1,1,1,2,2,2,3,3,4];
@@ -176,13 +176,7 @@ function VarakGen(){
     }
 }
 
-var VarIndex;
-function KiGenVarAttesz(img){
-    VarIndex = img.id;
-    RanyomE = true;
-}
-
-function elsoOtKepKirakas(){
+function elsoKepKirakas(){
     var OtosLapok= document.getElementById("OtosLapok");
     for(let i = 0; i < 5; i++){
         kezLista[i] = tablaKartyaLista[hatterKartyaLepteto];
@@ -258,12 +252,12 @@ function kepLerakas(div)
         document.getElementById("KivalasztoDiv").removeChild(document.getElementById("KivalasztoDiv").firstChild);
         if(kivalasztottKartya.type == "kártya")
         {
-            lerakottKartyaLista.splice(div.id,1,kivalasztottKartya);
+            lerakottKartyaLista.splice(div.id-1,1,kivalasztottKartya);
             kezbenLevoKartyakSzama--;
         }
         else
         {
-            lerakottKartyaLista.splice(div.id,1,kivalasztottKartya);
+            lerakottKartyaLista.splice(div.id-1,1,kivalasztottKartya);
         }
         if(KorValtasDB ==30)
         {
@@ -363,14 +357,17 @@ function ChildTorlesek(){
     document.getElementById("korokbox").removeChild(document.getElementById("korokbox").firstChild);
     document.getElementById("pontokbox").removeChild(document.getElementById("pontokbox").firstChild);
 }
-
+/*Kiszanolás rendszer:
+soronként oszloponként megyünk, 1-1 function az általnos oszlop és sor számításra, ha van különleges kártya akkor nem ez van meg hívva hanem a kártyátúl függő function ami saját szabályai alaoján számol
+*/ 
 function Kiszamolas(){
     //Test íras
-    let klista = lerakottKartyaLista;
+    let klista = lerakottKartyaLista; //Kimentes
     console.log(klista);
-    for(let i = 1; i < klista.length;i += 6){
-        let vdb = 0;
-        let db = 0;
+    for(let i = 0; i < klista.length;i += 6){
+        let vdb = 0; //Vár darab
+        let db = 0; //Kártya darab
+        let kulonlegesKartyak = [];
         for(let j = i; j < i+6;j++){
             SarkanyVanE(i);
             if(klista[j].type != "vár" && KartyakTag[klista[j].id -1].sign != 'hegy'){
