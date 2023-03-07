@@ -161,27 +161,53 @@ function KozosDivek(){
 }
 var VarLista = [1,1,1,1,2,2,2,3,3,4];
 function VarakGen(){
-    var Indexe = 0;
-    var VarDiv = document.getElementById("VarDiv");
-    for(var i = 1; i < 3;i++){
-        var VarakKiGensor = document.createElement("div");
-        VarakKiGensor.className = "VarakKiGensor";
-        for(var j = 0; j < 5;j++){
-            var KiGenVarDivek = document.createElement("div");
-            KiGenVarDivek.className= "KiGenVarDivek";
-            var Kep = document.createElement("img");
-            Kep.setAttribute("onclick","kepFelveves("+Indexe+",this,'vár')");
-            Kep.id = "v"+Indexe;
-            let Objekt = {};
-            Objekt.id = Indexe;
-            Objekt.value = VarLista[Indexe];
-            Objekt.type = "vár";
-            varKeszletLista.push(Objekt);
-            Kep.src = "bastyak/"+VarLista[Indexe++]+".png";
-            KiGenVarDivek.appendChild(Kep);
-            VarakKiGensor.appendChild(KiGenVarDivek);
+    if(KorSzamolo = 1)
+    {
+        var Indexe = 0;
+        var VarDiv = document.getElementById("VarDiv");
+        for(var i = 1; i < 3;i++){
+            var VarakKiGensor = document.createElement("div");
+            VarakKiGensor.className = "VarakKiGensor";
+            for(var j = 0; j < 5;j++){
+                var KiGenVarDivek = document.createElement("div");
+                KiGenVarDivek.className= "KiGenVarDivek";
+                KiGenVarDivek.id = "KGV"+Indexe;
+                var Kep = document.createElement("img");
+                Kep.setAttribute("onclick","kepFelveves("+Indexe+",this,'vár')");
+                Kep.id = "v"+Indexe;
+                let Objekt = {};
+                Objekt.id = Indexe;
+                Objekt.value = VarLista[Indexe];
+                Objekt.type = "vár";
+                varKeszletLista.push(Objekt);
+                Kep.src = "bastyak/"+VarLista[Indexe++]+".png";
+                KiGenVarDivek.appendChild(Kep);
+                VarakKiGensor.appendChild(KiGenVarDivek);
+            }
+            VarDiv.appendChild(VarakKiGensor);
         }
-        VarDiv.appendChild(VarakKiGensor);
+    }
+    else
+    {
+        //1-es varak szamlalasa
+        for(let i = 0;i<4;i++)
+        {
+            if(varKeszletLista[i]==undefined)
+            {
+                //Objekt készítés
+                let Objekt = {};
+                Objekt.id = i+1;
+                Objekt.value = VarLista[i+1];
+                Objekt.type = "vár";
+                varKeszletLista[i] = Objekt;
+                //Kép készítés
+                let div = document.getElementById("KGV"+i);
+                let kep = document.createElement("img");
+                kep.setAttribute("onclick","kepFelveves("+Indexe+",this,'vár')");
+                kep.id = "v"+Indexe;
+                div.appendChild(kep);
+            }
+        }
     }
 }
 
@@ -221,7 +247,7 @@ function CellakRandomizalasa(){
 
 function kepKeszites(kartyaObjekt)
 {
-    ertekCheckDebug();
+    //ertekCheckDebug();
     var kep = document.createElement("img");
     if(kartyaObjekt.type == "vár")
     {
@@ -235,12 +261,12 @@ function kepKeszites(kartyaObjekt)
 }
 function ertekCheckDebug()
 {
-    //console.log(kivalasztottKartya);
-    //console.log(kezLista);
-    //console.log(varKeszletLista);
-    //console.log(tablaKartyaLista);
-    //console.log(lerakottKartyaLista);
-    //console.log(KorValtasDB);
+    console.log(kivalasztottKartya);
+    console.log(kezLista);
+    console.log(varKeszletLista);
+    console.log(tablaKartyaLista);
+    console.log(lerakottKartyaLista);
+    console.log(KorValtasDB);
 }
 
 function kepLerakas(div)
