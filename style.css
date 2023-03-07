@@ -59,7 +59,7 @@ body{
     display: flex;
     flex-direction: column;
 }
-.PontokSorDiv{;
+.PontokSorDiv{
     margin-top: 5px;
     height: 80%;
     display: flex;

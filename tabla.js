@@ -126,13 +126,14 @@ function KorokBoxGen(){
 }
 
 function AlapPontokBox(){
+    let ErmeID = 0;
     let PontokBox = document.getElementById("pontokbox");
     for(let i = 0; i < 4;i++){
         var PontokSorDiv = document.createElement("div");
         PontokSorDiv.className = "PontokSorDiv"
         for(let j = 0; j < 8;j++){
             let PontokDiv = document.createElement("div");
-            PontokDiv.id = "P"+i;
+            PontokDiv.id = "P"+ErmeID++;
             let Kep = document.createElement("img")
             if(i == 0 && j == 0){
                 Kep.src = "ermek/50.png";
@@ -417,10 +418,12 @@ function Kiszamolas(){
         //console.log("OSzlop összeg: ",OszlopOsszeg);
         TeljesDB += OszlopOsszeg;
     }
-    console.log(lerakottKartyaLista);
-    console.log("A teljes összeg: "+TeljesDB);
+    //console.log(lerakottKartyaLista);
+    //console.log("A teljes összeg: "+TeljesDB);
     ErmekLeszamolsa(TeljesDB, false);
-    ErmeKipakolas();
+    if(ErmekLista.length > 0){
+        ErmeKipakolas();
+    }
 }
 
 function SarkanyVanE(){
@@ -550,7 +553,7 @@ function ErmekLeszamolsa(db, igaze){
             for(let i = 0; i < egyesek; i++){
                 ErmekLista.push(1);
             }
-            console.log(ErmekLista);
+            //console.log(ErmekLista);
         }
         else{
             let listaosszeg = 0;
@@ -566,15 +569,15 @@ function ErmekLeszamolsa(db, igaze){
         let tizesek =  Math.ceil(((TeljesDB % 100) % 50) / 10);
         let otosok =  Math.ceil((((TeljesDB % 100) % 50) % 10) /5);
         let egyesek =  Math.ceil((((TeljesDB % 100) % 50) % 10) % 5);
-        console.log("Százasok: "+szazasok+"\nÖtvensek: "+otvenesek+"\nTizesek: "+tizesek+"\nÖtösök: "+otosok+"\nEgyesek: "+egyesek);
+        //console.log("Százasok: "+szazasok+"\nÖtvensek: "+otvenesek+"\nTizesek: "+tizesek+"\nÖtösök: "+otosok+"\nEgyesek: "+egyesek);
 
         let vegosszeg = db + TeljesDB;
-        console.log(vegosszeg);
+        //console.log(vegosszeg);
         if(vegosszeg < 0){
             for(let i = 0; i < ErmekLista.length;i++){
-                document.getElementById("PontokSorDiv").removeChild(document.getElementById("PontokSorDiv").firstChild);
-                TeljesDB = 0;
+                document.getElementById("P"+i).removeChild(document.getElementById("P"+i).firstChild);
             }
+            TeljesDB = 0;
             ErmekLista = new Array();
         }
         else{
@@ -584,7 +587,16 @@ function ErmekLeszamolsa(db, igaze){
 }
 
 function ErmeKipakolas(){
-    
+    for(let i = 0; i < 32;i++){
+        if(document.getElementById("P"+i).firstChild != undefined){
+            document.getElementById("P"+i).removeChild(document.getElementById("P"+i).firstChild);
+        }
+    }
+    for(let i = 0; i < ErmekLista.length;i++){
+        let Kep = document.createElement("img");
+        Kep.src = "ermek/"+ErmekLista[i]+".png";
+        document.getElementById("P"+i).appendChild(Kep);
+    }
 }
 
 function Logo(){
