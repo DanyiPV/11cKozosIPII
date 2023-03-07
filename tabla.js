@@ -119,10 +119,6 @@ function KorokBoxGen(){
         KorokSorDiv.appendChild(KorokDivek);
     }
     KorokBox.appendChild(KorokSorDiv);
-    let PassDiv = document.createElement("div");
-    PassDiv.id = "PassDiv";
-    PassDiv.innerHTML = "<p>Passz</p>";
-    KorokBox.appendChild(PassDiv);
 }
 
 function AlapPontokBox(){
