@@ -164,7 +164,7 @@ function KozosDivek(){
 }
 
 function VarakGen(){
-    if(KorSzamolo = 1)
+    if(KorSzamolo == 1)
     {
         var Indexe = 0;
         var VarDiv = document.getElementById("VarDiv");
@@ -295,7 +295,6 @@ function kepLerakas(div)
         {
             console.log("Tábla tele, következő kör");
             Kiszamolas();
-            KorSzamolo++;
             KorKigyujt();
         }
         kivalasztottKartya = undefined;
@@ -378,7 +377,7 @@ function KorGen(){
     CellakRandomizalasa();
     KozosDivek();
     KorokBoxGen();
-    var KorokBoxDiv = document.getElementById("K"+KorSzamolo);
+    var KorokBoxDiv = document.getElementById("K"+(KorSzamolo++));
     KorokBoxDiv.className += " KoredikErtek";
 }
 
@@ -563,8 +562,8 @@ function ErmekLeszamolsa(db, igaze){
             for(let i = 0; i < egyesek; i++){
                 ErmekLista.push(1);
             }
-            console.log(ErmekLista);
-            console.log("Százasok: "+szazasok+"\nÖtvensek: "+otvenesek+"\nTizesek: "+tizesek+"\nÖtösök: "+otosok+"\nEgyesek: "+egyesek);
+            //console.log(ErmekLista);
+            //console.log("Százasok: "+szazasok+"\nÖtvensek: "+otvenesek+"\nTizesek: "+tizesek+"\nÖtösök: "+otosok+"\nEgyesek: "+egyesek);
         }
         else{
             let listaosszeg = 0;
