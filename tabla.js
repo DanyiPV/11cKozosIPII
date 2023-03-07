@@ -65,8 +65,10 @@ var KorValtasDB = 0; //Kör váltáshoz a db számláló
 var ErmekLista = new Array(); //érmék tárolásához való lista
 var TeljesDB = 0; //Érmék teljes összege
 var hatterKartyaLepteto = 0; //Háttérben a kártyát lépteti
-var VarLista = [1,1,1,1,2,2,2,3,3,4];
+var VarLista = [1,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,4,4];
 var vanEkivalasztva = false;
+var VarDB = 0; //Körönként csak 7 várat lehet letenni
+var KartyaDB = 0; //Kártya lerakás számolás, hogy az id-t le tudjam venni
 
 function JatekterBetoltes()
 {
@@ -169,7 +171,7 @@ function VarakGen(){
     for(var i = 0; i < 2;i++){
         var VarakKiGensor = document.createElement("div");
         VarakKiGensor.className = "VarakKiGensor";
-        for(var j = 0; j < 5;j++){
+        for(var j = 0; j < 10;j++){
             var KiGenVarDivek = document.createElement("div");
             KiGenVarDivek.className= "KiGenVarDivek";
             KiGenVarDivek.id = "KGV"+Indexe;
@@ -187,7 +189,7 @@ function VarakGen(){
         }
         VarDiv.appendChild(VarakKiGensor);
     }
-    for(let i = 0; i < 4;i++){
+    for(let i = 0; i < 7;i++){
         VarLista[i] = 1;
     }
     VarakGenCellaFeltoltes();
@@ -251,16 +253,6 @@ function kepKeszites(kartyaObjekt)
     return kep;
 }
 
-function ertekCheckDebug()
-{
-    console.log(kivalasztottKartya);
-    console.log(kezLista);
-    console.log(varKeszletLista);
-    console.log(tablaKartyaLista);
-    console.log(lerakottKartyaLista);
-    console.log(KorValtasDB);
-}
-
 function kepLerakas(div)
 {
     //console.log(kivalasztottKartya);
@@ -277,6 +269,7 @@ function kepLerakas(div)
         if(kivalasztottKartya.type == "kártya")
         {
             lerakottKartyaLista.splice(div.id-1,1,kivalasztottKartya);
+            KartyaDB++;
         }
         else
         {
@@ -289,6 +282,9 @@ function kepLerakas(div)
             KorKigyujt();
         }
         kivalasztottKartya = undefined;
+        if(KartyaDB == 23){
+            document.getElementById("kartyabox").firstChild.id = "";
+        }
     }
     else
     {
@@ -298,7 +294,11 @@ function kepLerakas(div)
 
 function kepFelveves(index,kep,fajta)
 {
-    if(vanEkivalasztva == false)
+    let kigyulte = false;
+    if(fajta == "vár" && VarDB == 7){
+        kigyulte = true;
+    }
+    if(vanEkivalasztva == false && kigyulte == false)
     {
         kep.removeAttribute("onclick");
         vanEkivalasztva = true;
@@ -311,6 +311,7 @@ function kepFelveves(index,kep,fajta)
             objekt.type = "vár";
             kivalasztottKartya = objekt;
             VarLista[index] = 0;
+            VarDB++;
         }
         else{
             kivalasztottKartya = tablaKartyaLista[0];
@@ -345,6 +346,8 @@ function KorKigyujt(){
             tablaKartyaLista = [];
             lerakottKartyaLista = new Array(30);
             KorValtasDB = 0;
+            VarDB = 0;
+            KartyaDB = 0;
             ChildTorlesek();
             JatekterBetoltes();
             JatekterElrendezes();
@@ -355,8 +358,13 @@ function KorKigyujt(){
         }
     }
     else{
-        KorGen();
-        ChildTorlesek();
+        let KorokBoxDiv = document.getElementById("K"+3);
+        KorokBoxDiv.className += " VKoredik";
+        KorokBoxDiv = document.getElementById("K"+2);
+        KorokBoxDiv.className += " VKoredik";
+        KorokBoxDiv = document.getElementById("K"+1);
+        KorokBoxDiv.className += " VKoredik";
+        VegKiiratas();
     }
 }
 
@@ -365,8 +373,19 @@ function KorGen(){
     CellakRandomizalasa();
     KozosDivek();
     KorokBoxGen();
-    var KorokBoxDiv = document.getElementById("K"+(KorSzamolo++));
+    let KorokBoxDiv = document.getElementById("K"+(KorSzamolo));
     KorokBoxDiv.className += " KoredikErtek";
+    if(KorSzamolo == 2){
+        KorokBoxDiv = document.getElementById("K"+1);
+        KorokBoxDiv.className += " VKoredik";
+    }
+    else if(KorSzamolo == 3){
+        KorokBoxDiv = document.getElementById("K"+1);
+        KorokBoxDiv.className += " VKoredik";
+        KorokBoxDiv = document.getElementById("K"+2);
+        KorokBoxDiv.className += " VKoredik";
+    }
+    KorSzamolo++;
 }
 
 function ChildTorlesek(){
@@ -475,17 +494,17 @@ function SarkanyVanE(){
 function PapVarNov(){
     for(let i = 0; i < lerakottKartyaLista.length;i++){
         if(lerakottKartyaLista[i].type == "kártya" && lerakottKartyaLista[i].kartya.sign == 'pap'){
-            if(i-1 > -1 && lerakottKartyaLista[i-1].type == "vár"){
-                lerakottKartyaLista[i-1].value = lerakottKartyaLista[i-1].value+1;
+            if(i-1 > -1 && lerakottKartyaLista[i-1].type != undefined && lerakottKartyaLista[i-1].type == "vár"){
+                lerakottKartyaLista[i-1].value++;
             }
-            else if(i+1 < 31 && lerakottKartyaLista[i+1].type == "vár"){
-                lerakottKartyaLista[i+1].value = lerakottKartyaLista[i+1].value+1;
+            else if(i+1 < 31 && lerakottKartyaLista[i-1].type != undefined && lerakottKartyaLista[i+1].type == "vár"){
+                lerakottKartyaLista[i+1].value++;
             }
-            else if(i-6 > -1 && lerakottKartyaLista[i-6].type == "vár"){
-                lerakottKartyaLista[i-6].value = lerakottKartyaLista[i-6].value+1;
+            else if(i-6 > -1 && lerakottKartyaLista[i-1].type != undefined &&lerakottKartyaLista[i-6].type == "vár"){
+                lerakottKartyaLista[i-6].value++;
             }
-            else if(i+6 < 31 && lerakottKartyaLista[i+6].type == "vár"){
-                lerakottKartyaLista[i+6].value = lerakottKartyaLista[i+6].value+1;
+            else if(i+6 < 31 && lerakottKartyaLista[i-1].type != undefined &&lerakottKartyaLista[i+6].type == "vár"){
+                lerakottKartyaLista[i+6].value++;
             } 
         }
     }
@@ -550,7 +569,6 @@ function ErmekLeszamolsa(db, igaze){
             for(let i = 0; i < egyesek; i++){
                 ErmekLista.push(1);
             }
-            //console.log(ErmekLista);
             //console.log("Százasok: "+szazasok+"\nÖtvensek: "+otvenesek+"\nTizesek: "+tizesek+"\nÖtösök: "+otosok+"\nEgyesek: "+egyesek);
         }
         else{
@@ -562,17 +580,7 @@ function ErmekLeszamolsa(db, igaze){
         }
     }
     else{
-        let szazasok = Math.ceil(db / 100);
-        let otvenesek =  Math.ceil((db % 100) / 50);
-        let tizesek =  Math.ceil(((db % 100) % 50) / 10);
-        let otosok =  Math.ceil((((db % 100) % 50) % 10) /5);
-        let egyesek =  Math.ceil((((db % 100) % 50) % 10) % 5);
-        //console.log("Százasok: "+szazasok+"\nÖtvensek: "+otvenesek+"\nTizesek: "+tizesek+"\nÖtösök: "+otosok+"\nEgyesek: "+egyesek);
-        let ermekosszeg = 0;
-        for(let i = 0; i < ErmekLista.length;i++){
-            ermekosszeg += ErmekLista[i];
-        }
-        let vegosszeg = ermekosszeg + db;
+        let vegosszeg = TeljesDB + db;
         if(vegosszeg < 0){
             for(let i = 0; i < ErmekLista.length;i++){
                 document.getElementById("P"+i).removeChild(document.getElementById("P"+i).firstChild);
@@ -588,8 +596,6 @@ function ErmekLeszamolsa(db, igaze){
     if(ErmekLista.length > 0){
         ErmeKipakolas();
     }
-    //console.log(ErmekLista);
-    //console.log(TeljesDB);
 }
 
 function ErmeKipakolas(){
@@ -613,6 +619,35 @@ function Logo(){
     Kep.id = "Logo";
     KepDiv.appendChild(Kep);
     document.body.appendChild(KepDiv);
+}
+
+function VegKiiratas(){
+    document.body.removeChild(document.getElementById("KozosDiv"));
+    for(let i = 0; i < 5; i++){
+        document.getElementById("tabla").removeChild(document.getElementById("tabla").firstChild);
+    }
+    let sotetito = document.createElement("div");
+    sotetito.id = "SotetitoDiv";
+    tabla.appendChild(sotetito);
+    let JatekVegeterFelIrat = document.createElement("div");
+    JatekVegeterFelIrat.id = "JatekVegeterFelIrat";
+    JatekVegeterFelIrat.innerHTML = "<h1>A játék véget ért!</h1>";
+    let PontSzamKiiras = document.createElement("div");
+    PontSzamKiiras.id = "PontSzamKiiras";
+    PontSzamKiiras.innerHTML = "<h3>Pontszámod:</h3>";
+    let db = 0;
+    for(let i = 0; i < ErmekLista.length;i++){
+        db += ErmekLista[i];
+    }
+    let PontSzam = document.createElement("div");
+    PontSzam.id = "PontSzam";
+    PontSzam.innerHTML = "<p>"+db+"</p>";
+    let KozDiv = document.createElement("div");
+    KozDiv.id = "KozDiv";
+    KozDiv.appendChild(JatekVegeterFelIrat);
+    KozDiv.appendChild(PontSzamKiiras);
+    KozDiv.appendChild(PontSzam);
+    sotetito.appendChild(KozDiv);
 }
 
 function Main()

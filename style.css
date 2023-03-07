@@ -79,7 +79,7 @@ body{
     background-image: url("tabla_hatter.jpg");
     background-size: cover;
     border: 1px solid white;
-    height: auto;
+    height: 32.1vw;
     display: flex;
     flex-direction: column;
     margin: 0 5px 0 5px;
@@ -100,11 +100,12 @@ body{
 .KorokDivek{
     margin: auto auto;
     height: 8vw;
-    border: 2px solid white;
+    border: 2px solid darkgray;
+    color: darkgray;
     width: 85%;
-    border-radius: 15px;
+    border-radius: 30px;
     transition: .8s;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(59, 59, 59, 0.5);
 }
 .KorokDivek p{
     margin-top: 19%;
@@ -114,8 +115,16 @@ body{
 .KoredikErtek{
     color: red;
     border: 3px solid red;
-    background-color: rgba(83, 83, 83, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 5px;
+}
+.VKoredik{
+    color: lime;
+    border: 3px solid lime;
+    background-color: rgba(32, 49, 29, 0.5);
+    border-radius: 30px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
 .sordiv{
     display: flex;
@@ -180,17 +189,18 @@ body{
     border-radius: 5px;
 }
 #VarDiv{
-    width: 35%;
+    width: 50%;
     border: 2px solid white;
     background-color: rgba(0, 0, 0, 0.6);
+    height: 10.5vw;
 }
 .VarakKiGensor{
     display: flex;
 }
 .KiGenVarDivek{
     height: 4vw;
-    width: 12%;
-    margin: 10px auto;
+    width: 8%;
+    margin: 1.2% auto;
     border: 1px solid white;
     border-radius: 5px;
     background-color: rgb(61, 61, 61, 0.6);
@@ -208,4 +218,33 @@ body{
     border-radius: 15px;
     transition: .8s;
     background-color: rgba(0, 0, 0, 0.5);
+}
+#SotetitoDiv{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.55);
+}
+#KozDiv{
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+#JatekVegeterFelIrat h1{
+    background: linear-gradient(130deg, red, rgb(0, 83, 138));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 75px;
+}
+#PontSzamKiiras h3{
+    background: linear-gradient(130deg, red, rgb(0, 83, 138));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 40px;
+}
+#PontSzam p{
+    background: linear-gradient(130deg, red, rgb(0, 83, 138));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 35px;
 }
