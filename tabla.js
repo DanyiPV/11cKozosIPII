@@ -62,6 +62,7 @@ var kivalasztottKartya;
 var CellaSzamlalo = 5; //Hány lerakott kártya van - Ez a kör váltáshoz nem működik
 var KorSzamolo = 1;
 var KorValtasDB = 0; //Kör váltáshoz a db számláló
+var ErmekLista = new Array(); //érmék tárolásához való lista
 
 function JatekterBetoltes()
 {
@@ -132,6 +133,7 @@ function AlapPontokBox(){
     PontokDiv.className = "PontokDiv";
     let Kep = document.createElement("img");
     Kep.src = "ermek/50.png";
+    ErmekLista.push(50);
     PontokDiv.appendChild(Kep);
     PontokSorDiv.appendChild(PontokDiv);
     PontokBox.appendChild(PontokSorDiv);
@@ -285,7 +287,7 @@ function kepLerakas(div)
 }
 var hatterKartyaLepteto = 0;
 
-function kepFelveves(index,kep)
+function kepFelveves(index,kep,fajta)
 {
     if(vanEkivalasztva == false)
     {
@@ -293,10 +295,20 @@ function kepFelveves(index,kep)
         vanEkivalasztva = true;
         var div = document.getElementById("KivalasztoDiv");
         div.appendChild(kep);
-        kivalasztottKartya = kezLista[index];
+        if(fajta == "vár"){
+            let objekt = {};
+            objekt.id = VarTag[VarLista[index]-1].id;
+            objekt.value = VarTag[VarLista[index]-1].value;
+            objekt.type = "vár";
+            kivalasztottKartya = objekt;
+        }
+        else{
+            kivalasztottKartya = kezLista[index];
+        }
         kezLista = new Array(1); 
     }
 }
+
 function huzas()
 {
     if(vanEkivalasztva == false && hatterKartyaLepteto != tablaKartyaLista.length){
@@ -346,6 +358,7 @@ function ChildTorlesek(){
     document.getElementById("korokbox").removeChild(document.getElementById("korokbox").firstChild);
     document.getElementById("pontokbox").removeChild(document.getElementById("pontokbox").firstChild);
 }
+
 function Kiszamolas(){
     //Test íras
     TeljesDB = 0;
@@ -398,6 +411,7 @@ function Kiszamolas(){
     }
     console.log(lerakottKartyaLista);
     console.log("A teljes összeg: "+TeljesDB);
+    ErmekLeszamolsa();
 }
 
 function SarkanyVanE(){
@@ -500,6 +514,41 @@ function Taliga(){
         for(let i = index; i < lerakottKartyaLista.length;i += 6)
         if(lerakottKartyaLista[i].type == "kártya"){
             lerakottKartyaLista[i].kartya.value = lerakottKartyaLista[i].kartya.value*2;
+        }
+    }
+}
+
+function ErmekLeszamolsa(){
+    let szazasok = Math.floor(TeljesDB / 100);
+    let otvenesek =  Math.floor((TeljesDB % 100) / 50);
+    let tizesek =  Math.floor(((TeljesDB % 100) % 50) / 10);
+    let otosok =  Math.floor((((TeljesDB % 100) % 50) % 10) /5);
+    let egyesek =  Math.floor((((TeljesDB % 100) % 50) % 10) % 5);
+    console.log("Százasok: "+szazasok+"\nÖtvensek: "+otvenesek+"\nTizesek: "+tizesek+"\nÖtösök: "+otosok+"\nEgyesek: "+egyesek);
+
+    if(TeljesDB > -1){
+        for(let i = 0; i < szazasok; i++){
+            ErmekLista.push(100);
+        }
+        for(let i = 0; i < otvenesek; i++){
+            ErmekLista.push(50);
+        }
+        for(let i = 0; i < tizesek; i++){
+            ErmekLista.push(10);
+        }
+        for(let i = 0; i < otosok; i++){
+            ErmekLista.push(5);
+        }
+        for(let i = 0; i < egyesek; i++){
+            ErmekLista.push(1);
+        }
+        console.log(ErmekLista);
+    }
+    else{
+        //Ide jön az érmék leszámolása
+        let listaosszeg = 0;
+        for(let i = 0; i < ErmekLista.length;i++){
+            listaosszeg += ErmekLista[i];
         }
     }
 }
