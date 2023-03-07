@@ -54,22 +54,22 @@ body{
     height: 100%;
 }
 #pontokbox{
-    border-top: 2px solid white;
-    margin: 0 2% 2% 2%;
-    height: 14vw;
+    margin: .5%;
+    height: 10vw;
+    display: flex;
+    flex-direction: column;
 }
-#PontokSorDiv{
-    border: 1px solid white;
+.PontokSorDiv{;
     margin-top: 5px;
-    height: 100%;
+    height: 80%;
     display: flex;
     flex-direction: row;
 }
 .PontokDiv{
     margin: 10px;
     border-radius: 50%;
-    height: 20%;
-    width: 10%;
+    height: 10%;
+    width: 8%;
 }
 .PontokDiv img{
     width: 100%;

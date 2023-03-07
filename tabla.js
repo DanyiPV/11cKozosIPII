@@ -127,16 +127,23 @@ function KorokBoxGen(){
 
 function AlapPontokBox(){
     let PontokBox = document.getElementById("pontokbox");
-    let PontokSorDiv = document.createElement("div");
-    PontokSorDiv.id = "PontokSorDiv";
-    let PontokDiv = document.createElement("div");
-    PontokDiv.className = "PontokDiv";
-    let Kep = document.createElement("img");
-    Kep.src = "ermek/50.png";
-    ErmekLista.push(50);
-    PontokDiv.appendChild(Kep);
-    PontokSorDiv.appendChild(PontokDiv);
-    PontokBox.appendChild(PontokSorDiv);
+    for(let i = 0; i < 4;i++){
+        var PontokSorDiv = document.createElement("div");
+        PontokSorDiv.className = "PontokSorDiv"
+        for(let j = 0; j < 8;j++){
+            let PontokDiv = document.createElement("div");
+            PontokDiv.id = "P"+i;
+            let Kep = document.createElement("img")
+            if(i == 0 && j == 0){
+                Kep.src = "ermek/50.png";
+                ErmekLista.push(50);
+            }
+            PontokDiv.className = "PontokDiv";
+            PontokDiv.appendChild(Kep);
+            PontokSorDiv.appendChild(PontokDiv);
+        }
+        PontokBox.appendChild(PontokSorDiv);
+    }
 }
 
 function KozosDivek(){
