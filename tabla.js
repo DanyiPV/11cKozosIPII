@@ -63,6 +63,10 @@ var CellaSzamlalo = 5; //Hány lerakott kártya van - Ez a kör váltáshoz nem 
 var KorSzamolo = 1;
 var KorValtasDB = 0; //Kör váltáshoz a db számláló
 var ErmekLista = new Array(); //érmék tárolásához való lista
+var TeljesDB = 0; //Érmék teljes összege
+var hatterKartyaLepteto = 0; //Háttérben a kártyát lépteti
+var VarLista = [1,1,1,1,2,2,2,3,3,4];
+var vanEkivalasztva = false;
 
 function JatekterBetoltes()
 {
@@ -104,7 +108,6 @@ function TablaGeneralas()
     Kep.setAttribute("onclick","huzas()");
     Kep.id = "KartyabBoxKepHover";
     KartyaBox.appendChild(Kep);
-    //KorokBoxGen();
 }
 
 function KorokBoxGen(){
@@ -159,7 +162,7 @@ function KozosDivek(){
     elsoKepKirakas();
     VarakGen();
 }
-var VarLista = [1,1,1,1,2,2,2,3,3,4];
+
 function VarakGen(){
     if(KorSzamolo = 1)
     {
@@ -224,9 +227,6 @@ function elsoKepKirakas(){
     OtosLapok.appendChild(LapDivek);
 }
 
-var vanEkivalasztva = false;
-
-
 function CellakRandomizalasa(){
     //Kártya tagek randomizálása
     tablaKartyaLista = [];
@@ -259,6 +259,7 @@ function kepKeszites(kartyaObjekt)
     }
     return kep;
 }
+
 function ertekCheckDebug()
 {
     console.log(kivalasztottKartya);
@@ -290,20 +291,12 @@ function kepLerakas(div)
         {
             lerakottKartyaLista.splice(div.id-1,1,kivalasztottKartya);
         }
-        if(KorValtasDB ==30)
+        if(KorValtasDB == 30)
         {
             console.log("Tábla tele, következő kör");
-            //ChildTorlesek();
-            //KorKigyujt();
             Kiszamolas();
-            vanEkivalasztva = false;
-            CellaSzamlalo = 5;
-            kezLista = new Array(1);
-            hatterKartyaLepteto = 0;
-            tablaKartyaLista = [];
-            lerakottKartyaLista = new Array(30);
-            KorValtasDB = 0;
             KorSzamolo++;
+            KorKigyujt();
         }
         kivalasztottKartya = undefined;
     }
@@ -312,7 +305,6 @@ function kepLerakas(div)
         console.log("Még nincs kiválsztva kártya"); 
     }
 }
-var hatterKartyaLepteto = 0;
 
 function kepFelveves(index,kep,fajta)
 {
@@ -359,6 +351,16 @@ function KorKigyujt(){
     if(KorSzamolo < 4){
         if(KorSzamolo != 1){
             CellaSzamlalo = 0;
+            vanEkivalasztva = false;
+            CellaSzamlalo = 5;
+            kezLista = new Array(1);
+            hatterKartyaLepteto = 0;
+            tablaKartyaLista = [];
+            lerakottKartyaLista = new Array(30);
+            KorValtasDB = 0;
+            ChildTorlesek();
+            JatekterBetoltes();
+            JatekterElrendezes();
             KorGen();
         }
         else{
@@ -376,7 +378,7 @@ function KorGen(){
     CellakRandomizalasa();
     KozosDivek();
     KorokBoxGen();
-    var KorokBoxDiv = document.getElementById("K"+KorSzamolo++);
+    var KorokBoxDiv = document.getElementById("K"+KorSzamolo);
     KorokBoxDiv.className += " KoredikErtek";
 }
 
@@ -387,9 +389,9 @@ function ChildTorlesek(){
     }
     document.body.removeChild(document.getElementById("KozosDiv"));
     document.getElementById("korokbox").removeChild(document.getElementById("korokbox").firstChild);
-    document.getElementById("pontokbox").removeChild(document.getElementById("pontokbox").firstChild);
+    document.getElementById("balpanel").removeChild(document.getElementById("balpanel").firstChild);
 }
-var TeljesDB = 0;
+
 function Kiszamolas(){
     //Test íras
     let klista = lerakottKartyaLista;
@@ -482,16 +484,6 @@ function SarkanyVanE(){
         }
     }
 }
-
-/*function HegyLeSzamolas(){
-    for(let i = 0; i < lerakottKartyaLista.length;i+=6){
-        for(let j = i; j < i+6;j++){
-            if(lerakottKartyaLista[j].type == "kártya" && lerakottKartyaLista[j].kartya.sign == "hegy"){
-                console.log(i +". értéken van a hegy");
-            }
-        }
-    }
-}*/
 
 function PapVarNov(){
     for(let i = 0; i < lerakottKartyaLista.length;i++){
