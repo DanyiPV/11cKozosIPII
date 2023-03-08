@@ -647,7 +647,59 @@ function VegKiiratas(){
     KozDiv.appendChild(JatekVegeterFelIrat);
     KozDiv.appendChild(PontSzamKiiras);
     KozDiv.appendChild(PontSzam);
+    let KozosGombDiv = document.createElement("div");
+    KozosGombDiv.id = "KozosGombDiv";
+    let Befejezes = document.createElement("div");
+    Befejezes.id = "Befejezes";
+    Befejezes.innerHTML = "<p>Befejezés</p>";
+    Befejezes.setAttribute("onclick","Befejezes(this)");
+    let UjraKezdes = document.createElement("div");
+    UjraKezdes.id = "UjraKezdes";
+    UjraKezdes.innerHTML = "<p>Újrakezdés</p>";
+    UjraKezdes.setAttribute("onclick","UjraKezdes()");
+    KozosGombDiv.appendChild(Befejezes);KozosGombDiv.appendChild(UjraKezdes);
+    KozDiv.appendChild(KozosGombDiv);
     sotetito.appendChild(KozDiv);
+}
+
+function Befejezes(div){
+    div.removeAttribute("onclick");
+    document.getElementById("UjraKezdes").removeAttribute("onclick");
+    div.id = "Kivalasztva";
+}
+
+function UjraKezdes(){
+    document.body.removeChild(document.getElementById("LogoDiv"));
+    document.body.removeChild(document.getElementById("jatekter"));
+    Logo();
+    jatekTer = document.createElement("div");
+    jatekTer.id = "jatekter";
+    document.body.appendChild(jatekTer);
+    balPanel = document.createElement("div");
+    kartyaBox = document.createElement("div");
+    pontokBox = document.createElement("div");
+    tabla = document.createElement("div");
+    korokBox = document.createElement("div");
+    tablaKartyaLista = [];
+    lerakottKartyaLista = new Array(30);
+    kezLista = new Array(1);
+    varKeszletLista = [];
+    kivalasztottKartya;
+    CellaSzamlalo = 5;
+    KorSzamolo = 1;
+    KorValtasDB = 0;
+    ErmekLista = new Array();
+    TeljesDB = 0;
+    hatterKartyaLepteto = 0;
+    VarLista = [1,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,4,4];
+    vanEkivalasztva = false;
+    VarDB = 0;
+    KartyaDB = 0;
+    KorSzamolo = 1;
+    JatekterBetoltes();
+    JatekterElrendezes();
+    AlapPontokBox();
+    KorKigyujt();
 }
 
 function Main()

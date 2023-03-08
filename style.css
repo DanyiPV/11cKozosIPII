@@ -41,6 +41,7 @@ body{
     margin: 2% 2% 0 2%;
     height: 14.7vw;
     border-bottom: 2px solid white;
+    transition: .8s;
 }
 #kartyabox img{
     margin: 2%;
@@ -70,6 +71,7 @@ body{
     border-radius: 50%;
     height: 10%;
     width: 8%;
+    transition: .8s;
 }
 .PontokDiv img{
     width: 100%;
@@ -96,6 +98,7 @@ body{
     flex-direction: column;
     margin: 0 8px 0 8px;
     height: 100%;
+    transition: .8s;
 }
 .KorokDivek{
     margin: auto auto;
@@ -106,6 +109,7 @@ body{
     border-radius: 30px;
     transition: .8s;
     background-color: rgba(59, 59, 59, 0.5);
+    transition: .8s;
 }
 .KorokDivek p{
     margin-top: 19%;
@@ -204,11 +208,13 @@ body{
     border: 1px solid white;
     border-radius: 5px;
     background-color: rgb(61, 61, 61, 0.6);
+    transition: .8s;
 }
 .KiGenVarDivek img{
     width: 100%;
     height: 100%;
     border-radius: 5px;
+    transition: .8s;
 }
 #PassDiv{
     margin: 1.5vw auto;
@@ -225,26 +231,81 @@ body{
     background-color: rgba(0, 0, 0, 0.55);
 }
 #KozDiv{
-    margin-top: 10%;
+    /*margin-top: 10%;*/
     display: flex;
     flex-direction: column;
     text-align: center;
+    height: 100%;
 }
 #JatekVegeterFelIrat h1{
+    margin: 2vw;
     background: linear-gradient(130deg, red, rgb(0, 83, 138));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 75px;
+    font-size: 5vw;
 }
 #PontSzamKiiras h3{
+    margin: 2vw;
     background: linear-gradient(130deg, red, rgb(0, 83, 138));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 40px;
+    font-size: 4vw;
+    transition: .8s;
 }
 #PontSzam p{
+    margin: 2vw;
     background: linear-gradient(130deg, red, rgb(0, 83, 138));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 35px;
+    font-size: 3vw;
+    transition: .8s;
+}
+#KozosGombDiv{
+    height: 5vw;
+    display: flex;
+    flex-direction: row;
+}
+#Befejezes{
+    border: 1px solid darkgray;
+    background-color: rgba(59, 59, 59, 0.5);
+    border-radius: 20px;
+    margin: auto;
+    height: 5vw;
+    width: 30%;
+    transition: .8s;
+    cursor: pointer;
+}
+#Befejezes p{
+    margin-top: 11%;
+    color: darkgray;
+    font-size: x-large;
+}
+#UjraKezdes{
+    border: 1px solid darkgray;
+    background-color: rgba(59, 59, 59, 0.5);
+    border-radius: 20px;
+    margin: auto;
+    height: 5vw;
+    width: 30%;
+    transition: .8s;
+    cursor: pointer;
+}
+#UjraKezdes p{
+    margin-top: 11%;
+    color: darkgray;
+    font-size: x-large;
+}
+#Kivalasztva{
+    border: 1px solid lime;
+    background-color: rgba(0, 255, 0, 0.5);
+    border-radius: 5px;
+    margin: auto;
+    height: 5vw;
+    width: 30%;
+    transition: .8s;
+}
+#Kivalasztva p{
+    margin-top: 11%;
+    color: white;
+    font-size: x-large;
 }
