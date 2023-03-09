@@ -15,7 +15,7 @@ var KartyakTag =
 {id:3,value:-1,sign:''},
 {id:4,value:2,sign:''},
 {id:5,value:-2,sign:''},
-{id:6,value:-2,sign:''},
+{id:6,value:0,sign:'hegy'},
 {id:7,value:2,sign:''},
 {id:8,value:3,sign:''},
 {id:9,value:3,sign:''},
@@ -192,10 +192,10 @@ function VarakGen(){
     for(let i = 0; i < 7;i++){
         VarLista[i] = 1;
     }
-    VarakGenCellaFeltoltes();
+    VarakGenKepKigeneralas();
 }
 
-function VarakGenCellaFeltoltes(){
+function VarakGenKepKigeneralas(){
     for(let i = 0; i < VarLista.length;i++){
         if(VarLista[i] != 0){
             let Kep = document.createElement("img");
