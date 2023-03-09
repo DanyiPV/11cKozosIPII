@@ -265,25 +265,10 @@ body{
     display: flex;
     flex-direction: row;
 }
-#Befejezes{
-    border: 1px solid darkgray;
-    background-color: rgba(59, 59, 59, 0.5);
-    border-radius: 20px;
-    margin: auto;
-    height: 5vw;
-    width: 30%;
-    transition: .8s;
-    cursor: pointer;
-}
-#Befejezes p{
-    margin-top: 11%;
-    color: darkgray;
-    font-size: x-large;
-}
 #UjraKezdes{
-    border: 1px solid darkgray;
-    background-color: rgba(59, 59, 59, 0.5);
-    border-radius: 20px;
+    border: 1px solid white;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
     margin: auto;
     height: 5vw;
     width: 30%;
@@ -292,20 +277,11 @@ body{
 }
 #UjraKezdes p{
     margin-top: 11%;
-    color: darkgray;
-    font-size: x-large;
-}
-#Kivalasztva{
-    border: 1px solid lime;
-    background-color: rgba(0, 255, 0, 0.5);
-    border-radius: 5px;
-    margin: auto;
-    height: 5vw;
-    width: 30%;
-    transition: .8s;
-}
-#Kivalasztva p{
-    margin-top: 11%;
     color: white;
     font-size: x-large;
+}
+#UjraKezdes:hover{
+    border: 3px solid white;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
 }
