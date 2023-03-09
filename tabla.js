@@ -493,8 +493,8 @@ function SarkanyVanE(){
 
 function PapVarNov(){
     for(let i = 0; i < lerakottKartyaLista.length;i++){
-        if(lerakottKartyaLista[i].type == "kártya" && lerakottKartyaLista[i].kartya.sign == 'pap'){
-            if(i-1 > -1 && lerakottKartyaLista[i-1].type != undefined && lerakottKartyaLista[i-1].type == "vár"){
+        if(lerakottKartyaLista[i].type == "kártya" && lerakottKartyaLista[i].kartya.sign == 'pap' && i-1 > -1){
+            if(lerakottKartyaLista[i-1].type != undefined && lerakottKartyaLista[i-1].type == "vár"){
                 lerakottKartyaLista[i-1].value++;
             }
             else if(i+1 < 31 && lerakottKartyaLista[i-1].type != undefined && lerakottKartyaLista[i+1].type == "vár"){
@@ -649,23 +649,9 @@ function VegKiiratas(){
     KozDiv.appendChild(PontSzam);
     let KozosGombDiv = document.createElement("div");
     KozosGombDiv.id = "KozosGombDiv";
-    let Befejezes = document.createElement("div");
-    Befejezes.id = "Befejezes";
-    Befejezes.innerHTML = "<p>Befejezés</p>";
-    Befejezes.setAttribute("onclick","Befejezes(this)");
-    let UjraKezdes = document.createElement("div");
-    UjraKezdes.id = "UjraKezdes";
-    UjraKezdes.innerHTML = "<p>Újrakezdés</p>";
-    UjraKezdes.setAttribute("onclick","UjraKezdes()");
-    KozosGombDiv.appendChild(Befejezes);KozosGombDiv.appendChild(UjraKezdes);
+    KozosGombDiv.appendChild(UjraKezdes);
     KozDiv.appendChild(KozosGombDiv);
     sotetito.appendChild(KozDiv);
-}
-
-function Befejezes(div){
-    div.removeAttribute("onclick");
-    document.getElementById("UjraKezdes").removeAttribute("onclick");
-    div.id = "Kivalasztva";
 }
 
 function UjraKezdes(){
