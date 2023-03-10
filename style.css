@@ -267,8 +267,8 @@ body{
 }
 #UjraKezdes{
     border: 1px solid white;
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
     margin: auto;
     height: 5vw;
     width: 30%;
@@ -279,4 +279,9 @@ body{
     margin-top: 11%;
     color: white;
     font-size: x-large;
+}
+#UjraKezdes:hover{
+    border: 3px solid white;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
 }
