@@ -71,7 +71,7 @@ var EremOsszeg = 0; //Érmék teljes összege
 var hatterKartyaLepteto = 0; //Háttérben a kártyát lépteti
 var vanEkivalasztva = false;
 
-function JatekterBetoltes()
+function JatekKeretBetoltes()
 {
     balPanel.appendChild(kartyaBox);
     balPanel.appendChild(pontokBox);
@@ -98,7 +98,8 @@ function JatekterBetoltes()
         PontokBox.appendChild(PontokSorDiv);
     }
 }
-function TablaGeneralas()
+
+function JatekBelsoBetoltes_TablaGeneralas()
 {
     var k = 1;
     for(var i = 0; i < 5; i++)
@@ -123,7 +124,7 @@ function TablaGeneralas()
     KartyaBox.appendChild(Kep);
 }
 
-function KorokBoxGen(){
+function JatekBelsoBetoltes_KorokBoxGen(){
     let KorokBox = document.getElementById("korokbox");
     let KorokSorDiv = document.createElement("div");
     KorokSorDiv.id = "KorokSorDiv";
@@ -137,7 +138,7 @@ function KorokBoxGen(){
     KorokBox.appendChild(KorokSorDiv);
 }
 
-function KozosDivek(){
+function JatekLentiBetoltes(){
     var KozosDiv = document.createElement("div");
     KozosDiv.id = "KozosDiv";
     var VarDiv = document.createElement("div");
@@ -157,7 +158,7 @@ function KozosDivek(){
     //elsoKepKirakas();
 }
 
-function VarakGen(){
+function JatekLentiBetoltes_VarakGen(){
     var Indexe = 0;
     var VarDiv = document.getElementById("VarDiv");
     for(let i = 0; i < 2;i++){
@@ -299,6 +300,7 @@ function huzas()
         CellaSzamlalo++;
     }
 }
+
 function Kor_ertekekResetelo()
 {
     CellaSzamlalo = 0;
@@ -311,11 +313,11 @@ function Kor_ertekekResetelo()
     KorValtasDB = 0;
     VarDB = 0;
 }
+
 function Kor(){
     if(KorSzamolo < 4){
-        Kor_ertekekResetelo();//
-        ChildTorlesek();//
-        JatekterBetoltes();//
+        Kor_ertekekResetelo();
+        ChildTorlesek();
         KorGen();
     }
     else{
@@ -330,9 +332,7 @@ function Kor(){
 }
 
 function KorGen(){
-    TablaGeneralas();
     CellakRandomizalasa();
-    KorokBoxGen();
     elsoKepKirakas();  
     VarakGen_VarakGenKepKigeneralas();
     let KorokBoxDiv = document.getElementById("K"+(KorSzamolo));
@@ -351,9 +351,9 @@ function KorGen(){
 }
 
 function ChildTorlesek(){
-    document.getElementById("kartyabox").removeChild(document.getElementById("kartyabox").firstChild);
-    for(let i = 0; i < 5; i++){
-        document.getElementById("tabla").removeChild(document.getElementById("tabla").firstChild);
+    for(let i = 0; i < 30; i++){
+        document.getElementById(i+1).removeChild(document.getElementById(i+1).firstChild);
+        document.getElementById(i+1).setAttribute("onclick","kepLerakas(this)");
     }
     for(let i = 0; i < 20; i++){
         if(document.getElementById("KGV"+i).firstChild != undefined){
@@ -363,8 +363,7 @@ function ChildTorlesek(){
     if(document.getElementById("o0").firstChild != undefined){
         document.getElementById("o0").removeChild(document.getElementById("o0").firstChild);
     }
-    document.getElementById("korokbox").removeChild(document.getElementById("korokbox").firstChild);
-    document.getElementById("balpanel").removeChild(document.getElementById("balpanel").firstChild);
+    document.getElementById("kartyabox").firstChild.id = "KartyabBoxKepHover";
 }
 
 function Kiszamolas(){
@@ -652,10 +651,15 @@ function UjraKezdes(){
     AlapPontokBox();
     Kor();
 }
-function Main_kezdoErtekek(){
-    JatekterBetoltes();
-    KozosDivek();
-    VarakGen();
+
+function JatekBelsoBetoltes(){
+    JatekBelsoBetoltes_KorokBoxGen();
+    JatekBelsoBetoltes_TablaGeneralas();
+}
+
+function JatekKezdoErtekBetoltes(){
+    JatekLentiBetoltes()
+    JatekLentiBetoltes_VarakGen()
     KorGen();
     let PontokDiv = document.getElementById("P"+0);
     let Kep = document.createElement("img");
@@ -663,8 +667,22 @@ function Main_kezdoErtekek(){
     ErmekLista.push(50);
     PontokDiv.appendChild(Kep);
 }
+function ertekDebug(){
+    console.log(lerakottKartyaLista);
+    console.log(kezLista);
+    console.log(tablaKartyaLista);
+    console.log(varKeszletLista);
+    console.log(ErmekLista);
+}
+function JatekBetoltes(){
+    JatekKeretBetoltes();
+    JatekBelsoBetoltes();
+    JatekKezdoErtekBetoltes();
+    ertekDebug();
+}
 function Main()
 {
-    Main_kezdoErtekek();
+    JatekBetoltes();
+    //Kor();
 }
 Main();

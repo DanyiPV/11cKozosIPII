@@ -50,6 +50,7 @@ body{
     margin-left: auto;
     margin-right: auto;
     transition: .8s;
+    cursor: pointer;
 }
 #KartyabBoxKepHover:hover{
     height: 100%;
@@ -191,6 +192,7 @@ body{
     width: 100%;
     height: 100%;
     border-radius: 5px;
+    cursor: pointer;
 }
 #VarDiv{
     width: 50%;
@@ -215,6 +217,7 @@ body{
     height: 100%;
     border-radius: 5px;
     transition: .8s;
+    cursor: pointer;
 }
 #PassDiv{
     margin: 1.5vw auto;
