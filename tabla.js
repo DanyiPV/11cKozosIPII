@@ -149,9 +149,12 @@ function KozosDivek(){
     document.body.appendChild(KozosDiv);
     var OtosLapok= document.createElement("div");
     OtosLapok.id = "OtosLapok";
+    var LapDivek = document.createElement("div");
+    LapDivek.className = "LapDivek";
+    LapDivek.id = "o"+0;
+    OtosLapok.appendChild(LapDivek);
     KozosDiv.appendChild(OtosLapok);
-    elsoKepKirakas();
-    VarakGen();
+    //elsoKepKirakas();
 }
 
 function VarakGen(){
@@ -173,7 +176,6 @@ function VarakGen(){
         }
         VarDiv.appendChild(VarakKiGensor);
     }
-    VarakGen_VarakGenKepKigeneralas();
 }
 
 function VarakGen_VarakGenKepKigeneralas(){
@@ -189,16 +191,12 @@ function VarakGen_VarakGenKepKigeneralas(){
 }
 
 function elsoKepKirakas(){
-    var OtosLapok= document.getElementById("OtosLapok");
+    var LapDivek = document.getElementById("o0");
     kezLista[0] = tablaKartyaLista[hatterKartyaLepteto];
-    var LapDivek = document.createElement("div");
-    LapDivek.className = "LapDivek";
-    LapDivek.id = "o"+0;
     var Lapok = document.createElement("img");
     Lapok.src = "kartyak/"+tablaKartyaLista[hatterKartyaLepteto++].kartya.id+".png";
     Lapok.setAttribute("onclick","kepFelveves("+0+",this,'kártya')");
     LapDivek.appendChild(Lapok);
-    OtosLapok.appendChild(LapDivek);
 }
 
 function CellakRandomizalasa(){
@@ -276,6 +274,9 @@ function kepFelveves(index,kep,fajta)
         div.appendChild(kep);
         if(fajta == "vár"){
             kivalasztottKartya = varKeszletLista[index];
+            if(index > 6){
+                varKeszletLista[index] = undefined;
+            }
         }
         else{
             kivalasztottKartya = tablaKartyaLista[0];
@@ -331,8 +332,9 @@ function Kor(){
 function KorGen(){
     TablaGeneralas();
     CellakRandomizalasa();
-    KozosDivek();
     KorokBoxGen();
+    elsoKepKirakas();  
+    VarakGen_VarakGenKepKigeneralas();
     let KorokBoxDiv = document.getElementById("K"+(KorSzamolo));
     KorokBoxDiv.className += " KoredikErtek";
     if(KorSzamolo == 2){
@@ -353,15 +355,20 @@ function ChildTorlesek(){
     for(let i = 0; i < 5; i++){
         document.getElementById("tabla").removeChild(document.getElementById("tabla").firstChild);
     }
-    document.body.removeChild(document.getElementById("KozosDiv"));
+    for(let i = 0; i < 20; i++){
+        if(document.getElementById("KGV"+i).firstChild != undefined){
+            document.getElementById("KGV"+i).removeChild(document.getElementById("KGV"+i).firstChild);
+        }
+    }
+    if(document.getElementById("o0").firstChild != undefined){
+        document.getElementById("o0").removeChild(document.getElementById("o0").firstChild);
+    }
     document.getElementById("korokbox").removeChild(document.getElementById("korokbox").firstChild);
     document.getElementById("balpanel").removeChild(document.getElementById("balpanel").firstChild);
 }
 
 function Kiszamolas(){
-    //Test íras
     let klista = lerakottKartyaLista;
-    //HegyLeSzamolas();
     PapVarNov();
     Taliga();
     SarkanyVanE();
@@ -370,20 +377,19 @@ function Kiszamolas(){
         let db = 0; //Kártya darab
         for(let j = i; j < i+6;j++){
             if(klista[j].type != "vár" && klista[j].sign != 'hegy'){
-                    db += klista[j].kartya.value;
+                db += klista[j].kartya.value;
             }
             else if(klista[j].type == "vár"){
-                vdb += klista[j].value;
+                vdb += klista[j].kartya.value;
             }
         }
-        var SorOsszeg = 0;
+        let SorOsszeg = 0;
         if(vdb != 0){
             SorOsszeg = db*vdb;
         }
         else{
             SorOsszeg = db;
         }
-        //console.log("Sor összeg: ",SorOsszeg);
         EremOsszeg += SorOsszeg;
     }
     for(let i = 0; i < 6;i++){
@@ -394,7 +400,7 @@ function Kiszamolas(){
                     db += klista[j].kartya.value;
             }
             else if(klista[j].type == "vár"){
-                vdb += klista[j].value;
+                vdb += klista[j].kartya.value;
             }
         }
         var OszlopOsszeg = 0;
@@ -404,11 +410,8 @@ function Kiszamolas(){
         else{
             OszlopOsszeg = db;
         }
-        //console.log("OSzlop összeg: ",OszlopOsszeg);
         EremOsszeg += OszlopOsszeg;
     }
-    //console.log(lerakottKartyaLista);
-    //console.log("A teljes összeg: "+EremOsszeg);
     ErmekLeszamolsa(EremOsszeg, false);
 }
 
@@ -529,7 +532,7 @@ function ErmekLeszamolsa(db, igaze){
             for(let i = 0; i < egyesek; i++){
                 ErmekLista.push(1);
             }
-            //console.log("Százasok: "+szazasok+"\nÖtvensek: "+otvenesek+"\nTizesek: "+tizesek+"\nÖtösök: "+otosok+"\nEgyesek: "+egyesek);
+            
         }
         else{
             let listaosszeg = 0;
@@ -545,7 +548,7 @@ function ErmekLeszamolsa(db, igaze){
             for(let i = 0; i < ErmekLista.length;i++){
                 document.getElementById("P"+i).removeChild(document.getElementById("P"+i).firstChild);
             }
-            EremOsszeg = 0;
+            //EremOsszeg = 0;
             ErmekLista = new Array();
         }
         else{
@@ -643,7 +646,6 @@ function UjraKezdes(){
     hatterKartyaLepteto = 0;
     vanEkivalasztva = false;
     VarDB = 0;
-    KartyaDB = 0;
     KorSzamolo = 1;
     JatekterBetoltes();
     JatekterElrendezes();
@@ -652,6 +654,8 @@ function UjraKezdes(){
 }
 function Main_kezdoErtekek(){
     JatekterBetoltes();
+    KozosDivek();
+    VarakGen();
     KorGen();
     let PontokDiv = document.getElementById("P"+0);
     let Kep = document.createElement("img");
@@ -662,6 +666,5 @@ function Main_kezdoErtekek(){
 function Main()
 {
     Main_kezdoErtekek();
-    //Inicializálást átrakom ide és akkor a Kor-nek nem kell ott checkelni
 }
 Main();
