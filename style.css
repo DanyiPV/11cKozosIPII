@@ -27,7 +27,7 @@ body{
     flex-direction: row;
     height: 30%;
 }
-#balpanel{
+#balPanel{
     width: 30%;
     /*background-image: url("balpanel_hatter.jpg");*/
     background-repeat: no-repeat;
@@ -37,13 +37,13 @@ body{
     border: 1px solid white;
     background-color: rgba(0, 0, 0, 0.55);
 }
-#kartyabox{
+#kartyaBox{
     margin: 2% 2% 0 2%;
     height: 14.7vw;
     border-bottom: 2px solid white;
     transition: .8s;
 }
-#kartyabox img{
+#kartyaBox img{
     margin: 2%;
     height: 85%;
     display: block;
@@ -55,7 +55,7 @@ body{
 #KartyabBoxKepHover:hover{
     height: 100%;
 }
-#pontokbox{
+#pontokBox{
     margin: .5%;
     height: 10vw;
     display: flex;
@@ -87,7 +87,7 @@ body{
     flex-direction: column;
     margin: 0 5px 0 5px;
 }
-#korokbox{
+#korokBox{
     width: 20%;
     height: auto;
     background-size: cover;
@@ -170,7 +170,7 @@ body{
     height: 10vw;
     width: 100%;
 }
-#OtosLapok{
+#KezdoLap{
     margin-right: 10.7%;
     margin-left: 10%;
     height: 10vw;
