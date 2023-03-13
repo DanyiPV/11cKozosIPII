@@ -487,9 +487,8 @@ function ertekReset(){
 
 function KorLepteto(){
     if(KorSzamolo > 1){
-        console.log(KorSzamolo);
         document.getElementById("Kor"+(KorSzamolo-1)).className = "KorokDivek VKoredik";
-        document.getElementById("Kor"+KorSzamolo).className += " KoredikErtek";
+        document.getElementById("Kor"+KorSzamolo++).className += " KoredikErtek";
     }
 }
 
@@ -504,18 +503,12 @@ function Kor(){
         varRajz();
         eremRajz();
         KorLepteto();
-        console.log("Kor: "+KorSzamolo++);
     }
-    else
-    {
-        veg();
-    }
+    else{veg();}
 }
-//Holnapra: kor vég érték kiszámlálás
 function Main()
 {
-
-    JatekBetoltes();
-    Kor();
+    document.body.innerHTML = "";
+    JatekBetoltes();Kor();
 }
 Main();
