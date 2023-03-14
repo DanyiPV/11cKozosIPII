@@ -54,11 +54,11 @@ var kivalasztottKartya;
 var HuzottlapSzamlalo = 1; //Ez a kör váltáshoz nem működik, 1-ről indul mert a kezdő kártyát már technikailag "felhúztuk"
 var lerakottLapokSzamlalo = 0;
 var KorSzamolo = 1; //Körváltáshoz nem kell db-t nézni, csak lerakottKartyaLista.Length
-var ErmekLista = new Array(); //érmék tárolásához való lista
 var EremOsszeg = 0; //Érmék teljes összege
 var vanEkivalasztva = false;
 
 function JatekBetoltes(){
+    KorSzamolo = 1;
     Betoltes_Panelek();
     Betoltes_BelsoDivek();
 }
@@ -181,7 +181,10 @@ function Betoltes_BelsoDivek(){
 }
 
 function KezdoErtekek(){
-    EremOsszeg+=50;
+    if(KorSzamolo==1)
+    {
+        EremOsszeg=50;
+    }
     //Kezdő kártya
     let kep = kepKeszites(tablaKartyaLista[0]);
     kep.setAttribute("onclick","felveves('kezdoLapDIV',this.parentElement)");
@@ -204,12 +207,11 @@ function pakliGen(){
 }
 
 function varGen(){
-    let Indexelo = 0;
     if(KorSzamolo == 1)
     {
         for(let i = 0;i<VarTag.length;i++)
         {
-            varKeszletLista.push(objektKeszito(Indexelo++,"var",VarTag[i]));
+            varKeszletLista.push(objektKeszito(i,"var",VarTag[i]));
         }
     }
     else
@@ -218,7 +220,7 @@ function varGen(){
         {
             if(varKeszletLista[i]==undefined)
             {
-                varKeszletLista.splice(i,1,objektKeszito(Indexelo++,"var",VarTag[i]));
+                varKeszletLista.splice(i,1,objektKeszito(i,"var",VarTag[i]));
             }
         }
     }
@@ -229,6 +231,7 @@ function varRajz(){
     {
         if(varKeszletLista[i]!=undefined)
         {
+            console.log(varKeszletLista[i]);
             let kep = kepKeszites(varKeszletLista[i]);
             kep.setAttribute("onclick","felveves("+i+",this.parentElement)");
             document.getElementById("varSlot"+i).appendChild(kep);
@@ -250,6 +253,10 @@ function kepKeszites(kartyaObjekt){
 }
 
 function eremRajz(){
+    if(EremOsszeg<=0)
+    {
+        return;
+    }
     let tempOszzeg = EremOsszeg;
     let lista = [100,50,10,5,1];
     let Indexelo = 0;
@@ -489,7 +496,7 @@ function szamolas(){
                 osszeg+=lerakottKartyaLista[j].kartya.value;
             }
         }
-        EremOsszeg+=osszeg*szorzo
+        EremOsszeg+=(osszeg*szorzo);
         console.log(osszeg);
     }
     for(let i = 0; i<6;i++)
@@ -507,19 +514,35 @@ function szamolas(){
                 osszeg+=lerakottKartyaLista[j].kartya.value;
             }
         }
-        EremOsszeg+=osszeg*szorzo
+        EremOsszeg+=(osszeg*szorzo);
         console.log(osszeg);
     }
+    console.log("Teljes osszeg: "+EremOsszeg);
 }
 
 function ertekReset(){
-    tablaKartyaLista = [];
-    lerakottKartyaLista = new Array(30);
-    kivalasztottKartya = undefined;
-    HuzottlapSzamlalo = 1; 
-    lerakottLapokSzamlalo = 0;
-    ErmekLista = new Array();
-    vanEkivalasztva = false;
+    if(KorSzamolo==4)
+    {
+        tablaKartyaLista = [];
+        lerakottKartyaLista = new Array(30);
+        varKeszletLista = [];
+        kivalasztottKartya;
+        HuzottlapSzamlalo = 1;
+        lerakottLapokSzamlalo = 0;
+        KorSzamolo = 1;
+        EremOsszeg = 0;
+        vanEkivalasztva = false;
+    }
+    else
+    {
+        tablaKartyaLista = [];
+        lerakottKartyaLista = new Array(30);
+        kivalasztottKartya = undefined;
+        HuzottlapSzamlalo = 1; 
+        lerakottLapokSzamlalo = 0;
+        ErmekLista = new Array();
+        vanEkivalasztva = false;
+    }
 }
 
 function KorLepteto(){
@@ -546,6 +569,7 @@ function Kor(){
 function Main()
 {
     document.body.innerHTML = "";
+    ertekReset();
     JatekBetoltes();Kor();
 }
 Main();
