@@ -227,9 +227,12 @@ function varGen(){
 function varRajz(){
     for(let i = 0;i<varKeszletLista.length;i++)
     {
-        let kep = kepKeszites(varKeszletLista[i]);
-        kep.setAttribute("onclick","felveves("+i+",this.parentElement)");
-        document.getElementById("varSlot"+i).appendChild(kep);
+        if(varKeszletLista[i]!=undefined)
+        {
+            let kep = kepKeszites(varKeszletLista[i]);
+            kep.setAttribute("onclick","felveves("+i+",this.parentElement)");
+            document.getElementById("varSlot"+i).appendChild(kep);
+        }
     }
 }
 
@@ -269,6 +272,7 @@ function kepTorlo(){
     for(let i = 0;i<30;i++)
     {
         document.getElementById("tabla"+i).innerHTML="";
+        document.getElementById("tabla"+i).setAttribute("onclick","lerakas(this)");
     }
     //várak
     for(let i = 0;i<20;i++)
@@ -281,6 +285,11 @@ function kepTorlo(){
         document.getElementById("ermeSlot"+i).innerHTML="";
     }
     document.getElementById("kezdoLapDIV").innerHTML="";
+    let div = document.getElementById("NemKartyabBoxKepHover");
+    if(div!=null)
+    {
+        div.id="KartyabBoxKepHover";
+    }
 }
 
 function huzas(){
@@ -291,7 +300,7 @@ function huzas(){
         KivalasztoDiv.appendChild(kepKeszites(kivalasztottKartya));
         HuzottlapSzamlalo++;
         if(HuzottlapSzamlalo == 23){
-            document.getElementById("KartyabBoxKepHover").id = "";
+            document.getElementById("KartyabBoxKepHover").id = "NemKartyabBoxKepHover";
         }
     }
 }
@@ -330,13 +339,41 @@ function lerakas(div){
         if(lerakottLapokSzamlalo==30)
         {
             szamolas();
+            KorSzamolo++;
             Kor();
         }
     }
 }
 
 function veg(){
-
+    document.body.removeChild(document.getElementById("KozosDiv"));
+    tabla.innerHTML = "";
+    let sotetito = document.createElement("div");
+    sotetito.id = "SotetitoDiv";
+    tabla.appendChild(sotetito);
+    let JatekVegeterFelIrat = document.createElement("div");
+    JatekVegeterFelIrat.id = "JatekVegeterFelIrat";
+    JatekVegeterFelIrat.innerHTML = "<h1>A játék véget ért!</h1>";
+    let PontSzamKiiras = document.createElement("div");
+    PontSzamKiiras.id = "PontSzamKiiras";
+    PontSzamKiiras.innerHTML = "<h3>Pontszámod:</h3>";
+    let PontSzam = document.createElement("div");
+    PontSzam.id = "PontSzam";
+    PontSzam.innerHTML = "<p>"+EremOsszeg+"</p>";
+    let KozDiv = document.createElement("div");
+    KozDiv.id = "KozDiv";
+    KozDiv.appendChild(JatekVegeterFelIrat);
+    KozDiv.appendChild(PontSzamKiiras);
+    KozDiv.appendChild(PontSzam);
+    let KozosGombDiv = document.createElement("div");
+    KozosGombDiv.id = "KozosGombDiv";
+    let UjraKezdes = document.createElement("div");
+    UjraKezdes.id = "UjraKezdes";
+    UjraKezdes.innerHTML = "<p>Újrakezdés</p>";
+    UjraKezdes.setAttribute("onclick","Main()");
+    KozosGombDiv.appendChild(UjraKezdes);
+    KozDiv.appendChild(KozosGombDiv);
+    sotetito.appendChild(KozDiv);
 }
 
 function kereses(tag){
@@ -488,7 +525,7 @@ function ertekReset(){
 function KorLepteto(){
     if(KorSzamolo > 1){
         document.getElementById("Kor"+(KorSzamolo-1)).className = "KorokDivek VKoredik";
-        document.getElementById("Kor"+KorSzamolo++).className += " KoredikErtek";
+        document.getElementById("Kor"+KorSzamolo).className += " KoredikErtek";
     }
 }
 
