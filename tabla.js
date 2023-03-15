@@ -112,7 +112,14 @@ function Betoltes_Panelek(){
 function objektKeszito(index,fajta,kartya){
     let Objekt = {};
     Objekt.id = index;
-    Objekt.kartya = kartya;
+    if(fajta=="kartya")
+    {
+        Objekt.kartya = {id: kartya.id,value: kartya.value,sign: kartya.sign};
+    }   
+    else
+    {
+        Objekt.kartya = {id: kartya.id,value: kartya.value,color: kartya.color};
+    }
     Objekt.type = fajta;
     return Objekt;
 }
@@ -227,6 +234,7 @@ function varGen(){
 }
 
 function varRajz(){
+    console.log(VarTag);
     for(let i = 0;i<varKeszletLista.length;i++)
     {
         if(varKeszletLista[i]!=undefined)
@@ -399,7 +407,6 @@ function kereses(tag){
 
 function pap(){
     let lista = kereses('pap');
-    console.log(lista);
     for(let i = 0; i<lista.length;i++)
     {
         if(lista[i].index-6>0)
@@ -435,7 +442,7 @@ function pap(){
 
 function sarkany(){
     //Baj van még a sorral (-1 lehet és nem tetszik neki)
-    let lista = kereses('sarkany')
+    let lista = kereses('sarkany');
     for(let i = 0; i<lista.length;i++)
     {
         for(let j = lista[i].sor*6; j< (lista[i].sor*6)+6;j++)
@@ -456,8 +463,7 @@ function sarkany(){
 }
 
 function banya(){ //A kiszámolás nem jó
-    let lista = kereses('taliga')
-    console.log(lista);
+    let lista = kereses('taliga');
     for(let i = 0; i<lista.length;i++)
     {
         for(let j = lista[i].sor*6; j<(lista[i].sor*6)+6;j++)
@@ -553,6 +559,7 @@ function KorLepteto(){
 }
 
 function Kor(){
+    console.log(KorSzamolo+" Kor");
     if(KorSzamolo<4)
     {
         ertekReset();
@@ -564,12 +571,15 @@ function Kor(){
         eremRajz();
         KorLepteto();
     }
-    else{veg();}
+    else{
+        veg();
+    }
 }
 function Main()
 {
     document.body.innerHTML = "";
     ertekReset();
-    JatekBetoltes();Kor();
+    JatekBetoltes();
+    Kor();
 }
 Main();
