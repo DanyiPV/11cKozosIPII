@@ -402,32 +402,32 @@ function pap(){
     console.log(lista);
     for(let i = 0; i<lista.length;i++)
     {
-        if(lista[i]-6>0)
+        if(lista[i].index-6>0)
         {
-            if(lerakottKartyaLista[lista[i]-6].type=='var')
+            if(lerakottKartyaLista[lista[i].index-6].type=='var')
             {
-                lerakottKartyaLista[lista[i]-6].kartya.value++;
+                lerakottKartyaLista[lista[i].index-6].kartya.value++;
             }
         }
-        if(lista[i]-1>0)
+        if(lista[i].index-1>0&&lista[i].index-1>=lista[i].sor*6)
         {
-            if(lerakottKartyaLista[lista[i]-1].type=='var')
+            if(lerakottKartyaLista[lista[i].index-1].type=='var')
             {
-                lerakottKartyaLista[lista[i]-1].kartya.value++;
+                lerakottKartyaLista[lista[i].index-1].kartya.value++;
             }
         }
-        if(lista[i]+1<30)
+        if(lista[i].index+1<30&&lista[i].index-1<=(lista[i].sor*6)+5)
         {
-            if(lerakottKartyaLista[lista[i]+1].type=='var')
+            if(lerakottKartyaLista[lista[i].index+1].type=='var')
             {
-                lerakottKartyaLista[lista[i]+1].kartya.value++;
+                lerakottKartyaLista[lista[i].index+1].kartya.value++;
             }
         }
-        if(lista[i]+6<30)
+        if(lista[i].index+6<30)
         {
-            if(lerakottKartyaLista[lista[i]+6].type=='var')
+            if(lerakottKartyaLista[lista[i].index+6].type=='var')
             {
-                lerakottKartyaLista[lista[i]+6].kartya.value++;
+                lerakottKartyaLista[lista[i].index+6].kartya.value++;
             }
         }
     }
